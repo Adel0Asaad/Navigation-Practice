@@ -4,12 +4,12 @@ import { NavigationContainer } from "@react-navigation/native";
 // const RootStack = createNativeStackNavigator();
 
 import { ImageBackground, StyleSheet } from "react-native";
-import Colors from "./util/Colors";
-import AuthStackComp from "./navContainers/AuthStack";
-import AppTabsComp from "./navContainers/AppTabs";
+import Colors from "./src/util/Colors";
+import AuthStackComp from "./src/ui/navContainers/AuthStackComp";
+import AppTabsComp from "./src/ui/navContainers/AppTabsComp";
 import { Provider } from "react-redux";
-import { store } from "./store/redux/store";
-import { useAppSelector, useAppDispatch } from "./store/redux/hooks";
+import { store } from "./src/store/redux/store";
+import { useAppSelector, useAppDispatch } from "./src/store/redux/hooks";
 
 
 function RootStack() {

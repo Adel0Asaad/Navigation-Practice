@@ -5,7 +5,9 @@ import { AccountStack } from "../util/navigation";
 
 function AccountStackComp() {
   return (
-    <AccountStack.Navigator>
+    <AccountStack.Navigator
+    initialRouteName="AccountScreen"
+    >
       <AccountStack.Screen name="AccountScreen" component={AccountScreen} />
       <AccountStack.Screen name="AccountDetailsScreen" component={AccountDetailsScreen} />
       <AccountStack.Screen name="AccountDetailsDetailsScreen" component={AccountDetailsDetailsScreen} />

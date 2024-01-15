@@ -13,7 +13,9 @@ function AppTabsComp() {
   return (
     <AppTabs.Navigator
       initialRouteName="HomeStack"
+      
       screenOptions={{
+        lazy: false,
         tabBarStyle: { backgroundColor: "#1f1d92" },
         tabBarActiveTintColor: ioniconStyle.activeColor,
       }}

@@ -8,6 +8,7 @@ function NotificationsDetailsScreen() {
   const navigation = useNavigation<NotificationsNavigation>();
   function notificationsNavHandler() {
     navigation.navigate("AccountStack", {screen: "AccountDetailsScreen"});
+    
   }
 
   return (

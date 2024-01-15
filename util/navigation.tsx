@@ -11,6 +11,7 @@ import {
 import {
   CompositeNavigationProp,
   NavigationProp,
+  NavigatorScreenParams,
 } from "@react-navigation/native";
 
 type AuthStackParamList = {
@@ -49,11 +50,11 @@ type SettingsStackParamList = {
 };
 
 export type AppTabParamList = {
-  AccountStack: undefined;
-  NotificationsStack: undefined;
-  HomeStack: undefined;
-  FeedStack: undefined;
-  SettingsStack: undefined;
+  AccountStack:       NavigatorScreenParams<AccountStackParamList>
+  NotificationsStack: NavigatorScreenParams<NotificationsStackParamList>
+  HomeStack:          NavigatorScreenParams<HomeStackParamList>
+  FeedStack:          NavigatorScreenParams<FeedStackParamList>
+  SettingsStack:      NavigatorScreenParams<SettingsStackParamList>
 };
 export const AppTabs = createBottomTabNavigator<AppTabParamList>();
 export const AccountStack = createNativeStackNavigator<AccountStackParamList>();

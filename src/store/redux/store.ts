@@ -1,13 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authState from "./slices/authSlice";
 import userState from "./slices/userSlice"
-import feedState from "./slices/feedSlice"
 
 export const store = configureStore({
     reducer: {
-        loggedState: authState,
-        username: userState,
-        feedbackData: feedState,
+        userData: userState,
     }
 })
 

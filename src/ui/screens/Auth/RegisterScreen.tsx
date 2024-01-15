@@ -19,15 +19,19 @@ function RegisterScreen(props: Props) {
   function usernameTextHandler(text: string) {
     setUsername(text)
   }
-
+  
   function dispatchLogin() {
-    username !== ""
-      ? dispatch(login(username))
-      : Alert.alert(
-          "Invalid username",
-          "Please enter a username using a-z, 0-9, special characters allowed.",
-          [{ text: "Okay", style: "destructive" }]
-        );
+    console.log(username);
+    if (username !== "") {
+      dispatch(login(username));
+      navigation.navigate("AppTabs", {screen: "HomeStack", params:{screen: "HomeScreen"}});
+    } else {
+      Alert.alert(
+        "Invalid username",
+        "Please enter a username using a-z, 0-9, special characters allowed.",
+        [{ text: "Okay", style: "destructive" }]
+      );
+    }
   }
 
   return (

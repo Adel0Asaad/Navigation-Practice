@@ -7,7 +7,7 @@ type Props = {
 }
 
 function WelcomeText(props: Props){
-    const username = useAppSelector((state) => state.username)
+    const username = useAppSelector((state) => state.userData.username)
     return <Text style={[styles.titleText, props.style]}>Welcome {username}</Text>
 }
 

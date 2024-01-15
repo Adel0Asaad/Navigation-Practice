@@ -5,18 +5,17 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import { ImageBackground, StyleSheet } from "react-native";
 import Colors from "./src/util/Colors";
-import AuthStackComp from "./src/ui/navContainers/AuthStackComp";
-import AppTabsComp from "./src/ui/navContainers/AppTabsComp";
 import { Provider } from "react-redux";
 import { store } from "./src/store/redux/store";
-import { useAppSelector, useAppDispatch } from "./src/store/redux/hooks";
+import RootStackComp from "./src/ui/navContainers/RootStackComp";
 
 
-function RootStack() {
-  const logged = useAppSelector((state) => state.loggedState)
-  // return <></> 
-  return logged ? <AppTabsComp /> : <AuthStackComp />;
-}
+// function RootStack() {
+//   const logged = useAppSelector((state) => state.userData.logged)
+//   // return <></> 
+//   return logged ? <AppTabsComp /> : <AuthStackComp />;
+
+// }
 
 export default function App() {
   return (
@@ -33,7 +32,7 @@ export default function App() {
       >
         <Provider store={store}>
           <NavigationContainer >
-            <RootStack />
+            <RootStackComp />
           </NavigationContainer>
         </Provider>
       </ImageBackground>

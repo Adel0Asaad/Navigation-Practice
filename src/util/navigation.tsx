@@ -12,18 +12,43 @@ import {
   NavigatorScreenParams,
 } from "@react-navigation/native";
 
+//////////////////////////// ROOT STACK ////////////////////////////
+
+type RootStackParamList = {
+  AuthStack: NavigatorScreenParams<AuthStackParamList>;
+  AppTabs: NavigatorScreenParams<AppTabParamList>;
+};
+export const RootStack = createNativeStackNavigator<RootStackParamList>();
+
+//////////////////////////// ROOT STACK ////////////////////////////
+
+//////////////////////////// AUTH STACK ////////////////////////////
+
 type AuthStackParamList = {
   LoginScreen: { username: string } | undefined;
   RegisterScreen: { username: string } | undefined;
 };
-// export type AuthStackNavigation = NativeStackScreenProps<AuthStackParamList>
 export const AuthStack = createNativeStackNavigator<AuthStackParamList>();
 
-export type LoginNavigation = NavigationProp<AuthStackParamList, "LoginScreen">;
-export type RegisterNavigation = NavigationProp<
-  AuthStackParamList,
-  "RegisterScreen"
+export type LoginNavigation = CompositeNavigationProp<
+  NativeStackNavigationProp<AuthStackParamList, "LoginScreen">,
+  NativeStackNavigationProp<RootStackParamList>
 >;
+export type RegisterNavigation = CompositeNavigationProp<
+  NativeStackNavigationProp<AuthStackParamList, "RegisterScreen">,
+  NativeStackNavigationProp<RootStackParamList>
+>;
+//////////////////////////// AUTH STACK ////////////////////////////
+
+///////////////////////////// APP TABS /////////////////////////////
+
+export type AppTabParamList = {
+  AccountStack: NavigatorScreenParams<AccountStackParamList>;
+  NotificationsStack: NavigatorScreenParams<NotificationsStackParamList>;
+  HomeStack: NavigatorScreenParams<HomeStackParamList>;
+  FeedStack: NavigatorScreenParams<FeedStackParamList>;
+  SettingsStack: NavigatorScreenParams<SettingsStackParamList>;
+};
 
 type AccountStackParamList = {
   AccountScreen: undefined;
@@ -47,13 +72,6 @@ type SettingsStackParamList = {
   SettingsDetailsScreen: undefined;
 };
 
-export type AppTabParamList = {
-  AccountStack:       NavigatorScreenParams<AccountStackParamList>
-  NotificationsStack: NavigatorScreenParams<NotificationsStackParamList>
-  HomeStack:          NavigatorScreenParams<HomeStackParamList>
-  FeedStack:          NavigatorScreenParams<FeedStackParamList>
-  SettingsStack:      NavigatorScreenParams<SettingsStackParamList>
-};
 export const AppTabs = createBottomTabNavigator<AppTabParamList>();
 export const AccountStack = createNativeStackNavigator<AccountStackParamList>();
 export const NotificationsStack =
@@ -67,10 +85,6 @@ export type AccountNavigation = CompositeNavigationProp<
   BottomTabNavigationProp<AppTabParamList, "AccountStack">,
   NativeStackNavigationProp<AccountStackParamList>
 >;
-// export type AccountDetailsNav = CompositeNavigationProp<
-//   BottomTabNavigationProp<AppTabParamList, "AccountDetailsScreen">,
-//   NativeStackNavigationProp<AccountStackParamList>
-// >;
 export type NotificationsNavigation = CompositeNavigationProp<
   BottomTabNavigationProp<AppTabParamList, "NotificationsStack">,
   NativeStackNavigationProp<NotificationsStackParamList>
@@ -87,3 +101,5 @@ export type SettingsNavigation = CompositeNavigationProp<
   BottomTabNavigationProp<AppTabParamList, "SettingsStack">,
   NativeStackNavigationProp<SettingsStackParamList>
 >;
+
+///////////////////////////// APP TABS /////////////////////////////

@@ -1,5 +1,6 @@
 import {
   NativeStackNavigationProp,
+  NativeStackScreenProps,
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
 import {
@@ -11,6 +12,10 @@ import {
   NavigationProp,
   NavigatorScreenParams,
 } from "@react-navigation/native";
+import {
+  MaterialTopTabNavigationProp,
+  createMaterialTopTabNavigator,
+} from "@react-navigation/material-top-tabs";
 
 //////////////////////////// ROOT STACK ////////////////////////////
 
@@ -46,7 +51,7 @@ export type AppTabParamList = {
   AccountStack: NavigatorScreenParams<AccountStackParamList>;
   NotificationsStack: NavigatorScreenParams<NotificationsStackParamList>;
   HomeStack: NavigatorScreenParams<HomeStackParamList>;
-  FeedStack: NavigatorScreenParams<FeedStackParamList>;
+  FeedTabs: NavigatorScreenParams<FeedTabParamList>;
   SettingsStack: NavigatorScreenParams<SettingsStackParamList>;
 };
 
@@ -63,10 +68,6 @@ type HomeStackParamList = {
   HomeScreen: undefined;
   HomeDetailsScreen: undefined;
 };
-export type FeedStackParamList = {
-  FeedScreen: undefined;
-  FeedDetailsScreen: { data: string } | undefined;
-};
 type SettingsStackParamList = {
   SettingsScreen: undefined;
   SettingsDetailsScreen: undefined;
@@ -77,7 +78,6 @@ export const AccountStack = createNativeStackNavigator<AccountStackParamList>();
 export const NotificationsStack =
   createNativeStackNavigator<NotificationsStackParamList>();
 export const HomeStack = createNativeStackNavigator<HomeStackParamList>();
-export const FeedStack = createNativeStackNavigator<FeedStackParamList>();
 export const SettingsStack =
   createNativeStackNavigator<SettingsStackParamList>();
 
@@ -93,13 +93,50 @@ export type HomeNavigation = CompositeNavigationProp<
   BottomTabNavigationProp<AppTabParamList, "HomeStack">,
   NativeStackNavigationProp<HomeStackParamList>
 >;
-export type FeedNavigation = CompositeNavigationProp<
-  BottomTabNavigationProp<AppTabParamList, "FeedStack">,
-  NativeStackNavigationProp<FeedStackParamList>
->;
+// export type FeedNavigation = CompositeNavigationProp<
+//   BottomTabNavigationProp<AppTabParamList, "FeedStack">,
+//   NativeStackNavigationProp<FeedStackParamList>
+// >;
 export type SettingsNavigation = CompositeNavigationProp<
   BottomTabNavigationProp<AppTabParamList, "SettingsStack">,
   NativeStackNavigationProp<SettingsStackParamList>
 >;
+
+///////////////////////////// FEED TABS /////////////////////////////
+export type ListingProps = NativeStackScreenProps<MovieStackParamList, "ListingScreen">
+export type DetailsProps = NativeStackScreenProps<MovieStackParamList, "DetailsScreen">
+
+export const FeedTabs = createMaterialTopTabNavigator<FeedTabParamList>();
+type FeedTabParamList = {
+  MovieStack: NavigatorScreenParams<MovieStackParamList>;
+  TVStack: NavigatorScreenParams<TVStackParamList>;
+};
+export type FeedNavigation = CompositeNavigationProp<
+  BottomTabNavigationProp<AppTabParamList, "FeedTabs">,
+  NativeStackNavigationProp<RootStackParamList, "AppTabs">
+>;
+
+type MovieStackParamList = {
+  ListingScreen: { genre: "Movies" | "TV"};
+  DetailsScreen: { movie: number };
+};
+type TVStackParamList = {
+  ListingScreen: { genre: "Movies" | "TV"};
+  DetailsScreen: { movie: number };
+};
+
+export const MovieStack = createNativeStackNavigator<MovieStackParamList>();
+export const TVStack = createNativeStackNavigator<TVStackParamList>();
+
+export type MovieNavigation = CompositeNavigationProp<
+  NativeStackNavigationProp<MovieStackParamList, "ListingScreen">,
+  MaterialTopTabNavigationProp<FeedTabParamList, "MovieStack">
+>;
+export type TVNavigation = CompositeNavigationProp<
+  NativeStackNavigationProp<MovieStackParamList, "ListingScreen">,
+  MaterialTopTabNavigationProp<FeedTabParamList, "TVStack">
+>;
+
+///////////////////////////// FEED TABS /////////////////////////////
 
 ///////////////////////////// APP TABS /////////////////////////////

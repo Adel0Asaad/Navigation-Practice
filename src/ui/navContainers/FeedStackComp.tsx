@@ -1,16 +1,13 @@
-import FeedDetailsScreen from "../screens/App/FeedDetailsScreen";
-import FeedScreen from "../screens/App/FeedScreen";
-import { FeedStack } from "../../util/navigation";
+import { FeedTabs } from "../../util/navigation";
+import MovieStackComp from "./MovieStackComp";
+import TVStackComp from "./TVStackComp";
 
 function FeedStackComp() {
   return (
-    <FeedStack.Navigator>
-      <FeedStack.Screen name="FeedScreen" component={FeedScreen} />
-      <FeedStack.Screen
-        name="FeedDetailsScreen"
-        component={FeedDetailsScreen}
-      />
-    </FeedStack.Navigator>
+    <FeedTabs.Navigator>
+      <FeedTabs.Screen name="MovieStack" component={MovieStackComp} />
+      <FeedTabs.Screen name="TVStack" component={TVStackComp} />
+    </FeedTabs.Navigator>
   );
 }
 

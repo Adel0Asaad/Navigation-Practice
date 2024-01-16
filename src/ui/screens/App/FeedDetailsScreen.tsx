@@ -1,17 +1,17 @@
-import { Text, View } from "react-native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { FeedStackParamList } from "../../../util/navigation";
+// import { Text, View } from "react-native";
+// import { NativeStackScreenProps } from "@react-navigation/native-stack";
+// import { FeedStackParamList } from "../../../util/navigation";
 
-type Props = NativeStackScreenProps<FeedStackParamList, "FeedDetailsScreen", "FeedStack">
+// type Props = NativeStackScreenProps<FeedStackParamList, "FeedDetailsScreen", "FeedStack">
 
-function FeedDetailsScreen({route}: Props){
-    const data = route.params?.data
+// function FeedDetailsScreen({route}: Props){
+//     const data = route.params?.data
 
-    return(
-        <View>
-            <Text>The entered text is: {data}</Text>
-        </View>
-    )
-}
+//     return(
+//         <View>
+//             <Text>The entered text is: {data}</Text>
+//         </View>
+//     )
+// }
 
-export default FeedDetailsScreen
+// export default FeedDetailsScreen

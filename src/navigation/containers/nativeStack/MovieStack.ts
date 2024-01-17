@@ -1,9 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { FilmType } from "../../../backend/types";
 
 export type MovieStackParamList = {
-  ListingScreen: { genre: FilmType };
-  DetailsScreen: { movie: number, genre: FilmType };
+  ListingScreen: undefined;
+  DetailsScreen: { movie: number };
 };
 
 export const MovieStack = createNativeStackNavigator<MovieStackParamList>();

@@ -6,7 +6,6 @@ import Colors from "../../util/Colors";
 function AuthStackComp() {
   return (
     <AuthStack.Navigator
-    
       screenOptions={{
         title: "",
         headerTitleAlign: "center",

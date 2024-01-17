@@ -1,16 +1,10 @@
 import { View, Text, Pressable, StyleSheet, Platform } from "react-native";
-import { FilmGenre } from "../../../../../backend/Classes/genres";
 import Colors from "../../../../../util/Colors";
-import { useState } from "react";
 
-type Props = {
-  onPress: (id: number) => void;
-};
-
-function MovieItem(item: {
+function SeriesItem(item: {
   id: number;
   genre_ids: number[];
-  title: string;
+  name: string;
   onPress: (id: number) => void;
 }) {
   const helperOnPressHandler = () => {
@@ -27,7 +21,7 @@ function MovieItem(item: {
         onPress={helperOnPressHandler}
       >
         <View>
-          <Text style={styles.genreText}>{item.title}</Text>
+          <Text style={styles.genreText}>{item.name}</Text>
         </View>
       </Pressable>
     </View>
@@ -71,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MovieItem;
+export default SeriesItem;

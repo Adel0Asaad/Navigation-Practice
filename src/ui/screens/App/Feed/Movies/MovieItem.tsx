@@ -1,38 +1,18 @@
 import { View, Text, Pressable, StyleSheet, Platform } from "react-native";
-import { FilmGenre } from "../../../../../backend/Classes/genres";
 import Colors from "../../../../../util/Colors";
-import { useState } from "react";
 
-type Props = {
-  onPress: (id: number) => void;
-};
-
-function GenreItem(item: {
+function MovieItem(item: {
   id: number;
-  genre: FilmGenre;
+  genre_ids: number[];
+  title: string;
   onPress: (id: number) => void;
 }) {
-  // const handleGenrePress = () => {
-  //   console.log("You pressed on: " + item.genre.name)
-  // }
-
-    const [selected, setSelected] = useState<boolean>(item.genre.selected)
-
   const helperOnPressHandler = () => {
-    item.onPress(item.id)
-    setSelected(!selected)
+    item.onPress(item.id);
   };
 
-
-
   return (
-    <View
-      style={
-        selected
-          ? [styles.genreItem, { backgroundColor: Colors.accent500 }]
-          : styles.genreItem
-      }
-    >
+    <View style={styles.genreItem}>
       <Pressable
         style={({ pressed }) =>
           pressed ? [styles.button, styles.pressedStyle] : styles.button
@@ -41,7 +21,7 @@ function GenreItem(item: {
         onPress={helperOnPressHandler}
       >
         <View>
-          <Text style={styles.genreText}>{item.genre.name}</Text>
+          <Text style={styles.genreText}>{item.title}</Text>
         </View>
       </Pressable>
     </View>
@@ -50,12 +30,11 @@ function GenreItem(item: {
 
 const styles = StyleSheet.create({
   genreItem: {
-    flex: 1,
     margin: 8,
     height: 75,
     width: 150,
     justifyContent: "center",
-    alignItems: "stretch",
+    alignItems: "center",
     backgroundColor: Colors.accent300,
     borderRadius: 8,
     elevation: 4,
@@ -85,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GenreItem;
+export default MovieItem;

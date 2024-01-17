@@ -1,0 +1,1 @@
+export type FilmType = "Movies" | "TV"

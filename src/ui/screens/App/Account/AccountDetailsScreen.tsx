@@ -1,8 +1,8 @@
 import { View } from "react-native"
-import WelcomeText from "../../components/WelcomeText"
-import PrimaryButton from "../../components/PrimaryButton"
+import WelcomeText from "../../../components/WelcomeText"
+import PrimaryButton from "../../../components/PrimaryButton"
 import { useNavigation } from "@react-navigation/native"
-import { AccountNavigation } from "../../../util/navigation"
+import { AccountNavigation } from "../../../../navigation/containers/nativeStack/AccountStack" 
 
 function AccountDetailsScreen(){
     const navigation = useNavigation<AccountNavigation>()

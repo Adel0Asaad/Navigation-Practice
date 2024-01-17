@@ -1,16 +1,23 @@
-import AccountDetailsDetailsScreen from "../screens/App/AccountDetailsDetailsScreen";
-import AccountDetailsScreen from "../screens/App/AccountDetailsScreen";
-import AccountScreen from "../screens/App/AccountScreen";
-import { AccountStack } from "../../util/navigation";
+import AccountDetailsDetailsScreen from "../screens/App/Account/AccountDetailsDetailsScreen";
+import AccountDetailsScreen from "../screens/App/Account/AccountDetailsScreen";
+import AccountScreen from "../screens/App/Account/AccountScreen";
+import { AccountStack } from "../../navigation/containers/nativeStack/AccountStack";
 
 function AccountStackComp() {
   return (
     <AccountStack.Navigator
-    initialRouteName="AccountScreen"
+      initialRouteName="AccountScreen"
+      screenOptions={{ headerTitle:"", headerTransparent: true }}
     >
       <AccountStack.Screen name="AccountScreen" component={AccountScreen} />
-      <AccountStack.Screen name="AccountDetailsScreen" component={AccountDetailsScreen} />
-      <AccountStack.Screen name="AccountDetailsDetailsScreen" component={AccountDetailsDetailsScreen} />
+      <AccountStack.Screen
+        name="AccountDetailsScreen"
+        component={AccountDetailsScreen}
+      />
+      <AccountStack.Screen
+        name="AccountDetailsDetailsScreen"
+        component={AccountDetailsDetailsScreen}
+      />
     </AccountStack.Navigator>
   );
 }

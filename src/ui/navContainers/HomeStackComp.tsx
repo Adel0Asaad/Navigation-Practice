@@ -1,12 +1,27 @@
-import HomeDetailsScreen from "../screens/App/HomeDetailsScreen";
-import HomeScreen from "../screens/App/HomeScreen";
-import { HomeStack } from "../../util/navigation";
+import HomeDetailsScreen from "../screens/App/Home/HomeDetailsScreen";
+import HomeScreen from "../screens/App/Home/HomeScreen";
+import { HomeStack } from "../../navigation/containers/nativeStack/HomeStack";
+import Colors from "../../util/Colors";
 
 function HomeStackComp() {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
-      <HomeStack.Screen name="HomeDetailsScreen" component={HomeDetailsScreen} />
+    <HomeStack.Navigator
+      screenOptions={{
+        title: "",
+        headerTitleAlign: "center",
+        headerStyle: { backgroundColor: Colors.accent300 },
+      }}
+    >
+      <HomeStack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ title: "Home Screen" }}
+      />
+      <HomeStack.Screen
+        name="HomeDetailsScreen"
+        component={HomeDetailsScreen}
+        options={{ title: "Home Details" }}
+      />
     </HomeStack.Navigator>
   );
 }

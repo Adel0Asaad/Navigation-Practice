@@ -1,10 +1,11 @@
-import { TVStack } from "../../util/navigation";
+import { TVStack } from "../../navigation/containers/nativeStack/TVStack"; 
 import DetailsScreen from "../screens/App/Feed/DetailsScreen";
 import ListingScreen from "../screens/App/Feed/ListingScreen";
 
 const TVStackComp = () => {
   return (
-    <TVStack.Navigator>
+    <TVStack.Navigator
+    screenOptions={{ headerTitle:"", headerTransparent: true }}>
       <TVStack.Screen
         name="ListingScreen"
         component={ListingScreen}

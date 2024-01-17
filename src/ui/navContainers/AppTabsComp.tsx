@@ -1,4 +1,4 @@
-import { AppTabs } from "../../util/navigation";
+import { AppTabs } from "../../navigation/containers/bottomTab/AppTabs";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
@@ -6,18 +6,19 @@ import { AntDesign } from "@expo/vector-icons";
 import AccountStackComp from "./AccountStackComp";
 import NotificationsStackComp from "./NotificationsStackComp";
 import HomeStackComp from "./HomeStackComp";
-import FeedStackComp from "./FeedStackComp";
 import SettingsStackComp from "./SettingsStackComp";
+import FeedTabsComp from "./FeedTabsComp";
+import Colors from "../../util/Colors";
 
 function AppTabsComp() {
   return (
     <AppTabs.Navigator
       initialRouteName="HomeStack"
-      
       screenOptions={{
         lazy: false,
         tabBarStyle: { backgroundColor: "#1f1d92" },
         tabBarActiveTintColor: ioniconStyle.activeColor,
+        headerShown: false,
       }}
     >
       <AppTabs.Screen
@@ -69,8 +70,8 @@ function AppTabsComp() {
         }}
       />
       <AppTabs.Screen
-        name="FeedStack"
-        component={FeedStackComp}
+        name="FeedTabs"
+        component={FeedTabsComp}
         options={{
           title: "Feed",
           tabBarIcon: ({ focused }) => (

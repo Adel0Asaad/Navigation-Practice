@@ -1,15 +1,11 @@
-import { useDispatch } from "react-redux";
-import PrimaryButton from "../../components/PrimaryButton";
+import PrimaryButton from "../../../components/PrimaryButton";
 import { StyleSheet, View } from "react-native";
-import { useAppSelector } from "../../../store/redux/hooks";
 import { useNavigation } from "@react-navigation/native";
-import { HomeNavigation } from "../../../util/navigation";
-import WelcomeText from "../../components/WelcomeText";
+import { HomeNavigation } from "../../../../navigation/containers/nativeStack/HomeStack"; 
+import WelcomeText from "../../../components/WelcomeText";
 
 function HomeScreen() {
   const navigation = useNavigation<HomeNavigation>()
-  const username = useAppSelector((state) => state.username);
-  const dispatch = useDispatch();
   function homeNavHandler() {
     // dispatch(logout());
     // dispatch(resetUsername());

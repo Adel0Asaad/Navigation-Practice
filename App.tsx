@@ -19,24 +19,24 @@ import RootStackComp from "./src/ui/navContainers/RootStackComp";
 
 export default function App() {
   return (
-    <LinearGradient
-      style={styles.rootScreen}
-      colors={[Colors.primary800, Colors.accent500]}
-    >
-      <StatusBar style="dark" />
-      <ImageBackground
-        source={require("./assets/images/background2.jpg")}
-        resizeMode="cover"
-        style={styles.rootScreen}
-        imageStyle={styles.backgroundImage}
-      >
-        <Provider store={store}>
-          <NavigationContainer >
+    // <LinearGradient
+    //   style={styles.rootScreen}
+    //   colors={[Colors.primary800, Colors.accent500]}
+    // >
+    //   <StatusBar style="dark" />
+    //   <ImageBackground
+    //     source={require("./assets/images/background2.jpg")}
+    //     resizeMode="cover"
+    //     style={styles.rootScreen}
+    //     imageStyle={styles.backgroundImage}
+    //   >
+        <Provider store={store} >
+          <NavigationContainer  >
             <RootStackComp />
           </NavigationContainer>
         </Provider>
-      </ImageBackground>
-    </LinearGradient>
+    //   </ImageBackground>
+    // </LinearGradient>
   );
 }
 

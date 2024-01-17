@@ -2,18 +2,18 @@ import { Alert, StyleSheet, TextInput, View } from "react-native";
 import PrimaryButton from "../../components/PrimaryButton";
 import Colors from "../../../util/Colors";
 import { useAppDispatch } from "../../../store/redux/hooks";
-import { useNavigation } from "@react-navigation/native";
-import { RegisterNavigation } from "../../../util/navigation";
 import { login } from "../../../store/redux/slices/userSlice";
 import { useState } from "react";
+import { useAppNavigation } from "../../../navigation/appNav";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { AuthStackParamList } from "../../../navigation/containers/nativeStack/AuthStack";
 
-type Props = {
-  username?: string,
-}
+type Props = NativeStackScreenProps<AuthStackParamList, "RegisterScreen">
 
-function RegisterScreen(props: Props) {
-  const navigation = useNavigation<RegisterNavigation>();
-  const [username, setUsername] = useState<string>(props.username ? props.username : "")
+function RegisterScreen({route}: Props) {
+  const navigation = useAppNavigation()
+  console.log(route.params?.username)
+  const [username, setUsername] = useState<string>(route.params?.username ?? "")
   const dispatch = useAppDispatch();
 
   function usernameTextHandler(text: string) {

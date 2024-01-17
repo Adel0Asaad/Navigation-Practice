@@ -1,8 +1,8 @@
 import { View } from "react-native";
-import WelcomeText from "../../components/WelcomeText";
-import PrimaryButton from "../../components/PrimaryButton";
+import WelcomeText from "../../../components/WelcomeText";
+import PrimaryButton from "../../../components/PrimaryButton";
 import { useNavigation } from "@react-navigation/native";
-import { NotificationsNavigation } from "../../../util/navigation";
+import { NotificationsNavigation } from "../../../../navigation/containers/nativeStack/NotificationsStack";
 
 function NotificationsScreen() {
   const navigation = useNavigation<NotificationsNavigation>();

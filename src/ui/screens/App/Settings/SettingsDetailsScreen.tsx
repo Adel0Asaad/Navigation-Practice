@@ -1,10 +1,10 @@
 import { View } from "react-native"
-import WelcomeText from "../../components/WelcomeText"
-import PrimaryButton from "../../components/PrimaryButton"
+import WelcomeText from "../../../components/WelcomeText"
+import PrimaryButton from "../../../components/PrimaryButton"
 import { useDispatch } from "react-redux"
-import { logout } from "../../../store/redux/slices/userSlice"
+import { logout } from "../../../../store/redux/slices/userSlice"
 import { useNavigation } from "@react-navigation/native"
-import { LoginNavigation } from "../../../util/navigation"
+import { LoginNavigation } from "../../../../navigation/containers/nativeStack/AuthStack" 
 
 function SettingsDetailsScreen(){
     const navigation = useNavigation<LoginNavigation>()

@@ -3,12 +3,12 @@ import PrimaryButton from "../../components/PrimaryButton";
 import Colors from "../../../util/Colors";
 import { useAppDispatch } from "../../../store/redux/hooks";
 import { useNavigation } from "@react-navigation/native";
-import { LoginNavigation } from "../../../util/navigation";
 import { login } from "../../../store/redux/slices/userSlice";
 import { useState } from "react";
+import { useAppNavigation } from "../../../navigation/appNav";
 
 function LoginScreen() {
-  const navigation = useNavigation<LoginNavigation>();
+  const navigation = useAppNavigation();
   const [username, setUserName] = useState<string>("");
   const dispatch = useAppDispatch();
 
@@ -20,7 +20,10 @@ function LoginScreen() {
     console.log(username);
     if (username !== "") {
       dispatch(login(username));
-      navigation.navigate("AppTabs", {screen: "HomeStack", params:{screen: "HomeScreen"}});
+      navigation.navigate("AppTabs", {
+        screen: "HomeStack",
+        params: { screen: "HomeScreen" },
+      });
     } else {
       Alert.alert(
         "Invalid username",
@@ -30,9 +33,12 @@ function LoginScreen() {
     }
   }
 
-  function registerHandler() {
-    navigation.navigate("RegisterScreen", {username: username});
-  }
+  const registerHandler = () => {
+    navigation.navigate("AuthStack", {
+      screen: "RegisterScreen",
+      params: { username: username },
+    });
+  };
 
   return (
     <View style={styles.rootScreen}>
@@ -56,7 +62,11 @@ function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
-  rootScreen: {},
+  rootScreen: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   userTextInput: {
     marginTop: 16,
     borderWidth: 1,

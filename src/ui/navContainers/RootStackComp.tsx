@@ -1,20 +1,13 @@
-import { RootStack } from "../../util/navigation";
+import { RootStack } from "../../navigation/containers/nativeStack/RootStack";
+import Colors from "../../util/Colors";
 import AppTabsComp from "./AppTabsComp";
 import AuthStackComp from "./AuthStackComp";
 
 function RootStackComp() {
   return (
-    <RootStack.Navigator>
-      <RootStack.Screen
-        name="AuthStack"
-        component={AuthStackComp}
-        options={{ title: "Authentication", headerShown: false }}
-      />
-      <RootStack.Screen
-        name="AppTabs"
-        component={AppTabsComp}
-        options={{ title: "Application", headerShown: false }}
-      />
+    <RootStack.Navigator screenOptions={{ headerShown: false }}>
+      <RootStack.Screen name="AuthStack" component={AuthStackComp} />
+      <RootStack.Screen name="AppTabs" component={AppTabsComp} />
     </RootStack.Navigator>
   );
 }

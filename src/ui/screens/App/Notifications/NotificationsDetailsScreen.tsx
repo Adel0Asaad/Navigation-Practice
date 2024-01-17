@@ -1,14 +1,13 @@
 import { View } from "react-native";
-import WelcomeText from "../../components/WelcomeText";
-import PrimaryButton from "../../components/PrimaryButton";
+import WelcomeText from "../../../components/WelcomeText";
+import PrimaryButton from "../../../components/PrimaryButton";
 import { useNavigation } from "@react-navigation/native";
-import { NotificationsNavigation } from "../../../util/navigation";
+import { NotificationsNavigation } from "../../../../navigation/containers/nativeStack/NotificationsStack";
 
 function NotificationsDetailsScreen() {
   const navigation = useNavigation<NotificationsNavigation>();
   function notificationsNavHandler() {
-    navigation.navigate("AccountStack", {screen: "AccountDetailsScreen"});
-    
+    navigation.navigate("AccountStack", { screen: "AccountDetailsScreen" });
   }
 
   return (

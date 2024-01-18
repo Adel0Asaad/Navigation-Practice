@@ -46,7 +46,10 @@ function ListingScreen({ route, navigation }: ListingProps) {
   ////////////////////////// FILTERING //////////////////////////
 
   useEffect(() => {
+    console.log(searchText);
     setListMovie(series.filter((item) => item.name.includes(searchText)));
+  }, [searchText]);
+  useEffect(() => {
     if (selectedGenres.length) {
       setListMovieFG(
         listSeries.filter((item) =>
@@ -56,10 +59,10 @@ function ListingScreen({ route, navigation }: ListingProps) {
     } else {
       setListMovieFG(listSeries);
     }
-  }, [selectedGenres, searchText]);
-  useEffect(() => {
-    listSeriesFG.forEach((item) => console.log(item.name));
-  }, [listSeriesFG]);
+  }, [listSeries, selectedGenres]);
+  // useEffect(() => {
+  //   listSeriesFG.forEach((item) => console.log(item.name));
+  // }, [listSeriesFG]);
 
   ////////////////////////// FILTERING //////////////////////////
 
@@ -68,7 +71,7 @@ function ListingScreen({ route, navigation }: ListingProps) {
   };
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Title>Listing Series</Title>
       <View style={{ marginTop: 12, margin: 6 }}>
         <SearchBar
@@ -95,9 +98,8 @@ function ListingScreen({ route, navigation }: ListingProps) {
         />
       </View>
       <TitleSmall>Series</TitleSmall>
-      <View style={{height: 200}}>
+      <View style={{ flex: 1 }}>
         <FlatList
-          style={{ flex: 1, marginBottom: 50 }}
           contentContainerStyle={{
             justifyContent: "center",
             alignItems: "stretch",
@@ -105,7 +107,7 @@ function ListingScreen({ route, navigation }: ListingProps) {
           numColumns={2}
           data={listSeriesFG}
           renderItem={({ item }) => {
-            console.log("Received: " + item.name);
+            // console.log("Received: " + item.name);
             return (
               <SeriesItem
                 id={item.id}
@@ -135,5 +137,10 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     backgroundColor: Colors.primary800,
+  },
+  whereAmI: {
+    borderWidth: 5,
+    borderColor: "red",
+    backgroundColor: "red",
   },
 });

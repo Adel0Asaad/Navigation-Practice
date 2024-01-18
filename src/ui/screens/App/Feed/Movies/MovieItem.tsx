@@ -30,11 +30,12 @@ function MovieItem(item: {
 
 const styles = StyleSheet.create({
   genreItem: {
+    flex: 1,
     margin: 8,
     height: 75,
     width: 150,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "stretch",
     backgroundColor: Colors.accent300,
     borderRadius: 8,
     elevation: 4,
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "stretch",
   },
 });
 

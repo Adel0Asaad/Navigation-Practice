@@ -46,6 +46,8 @@ function ListingScreen({ route, navigation }: ListingProps) {
 
   useEffect(() => {
     setListMovie(movies.filter((item) => item.title.includes(searchText)));
+  }, [searchText]);
+  useEffect(() => {
     if (selectedGenres.length) {
       setListMovieFG(
         listMovie.filter((item) =>
@@ -55,10 +57,7 @@ function ListingScreen({ route, navigation }: ListingProps) {
     } else {
       setListMovieFG(listMovie);
     }
-  }, [selectedGenres, searchText]);
-  useEffect(() => {
-    listMovieFG.forEach((item) => console.log(item.title));
-  }, [listMovieFG]);
+  }, [listMovie, selectedGenres]);
 
   ////////////////////////// FILTERING //////////////////////////
 
@@ -67,7 +66,7 @@ function ListingScreen({ route, navigation }: ListingProps) {
   };
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Title>Listing Movies</Title>
       <View style={{ marginTop: 12, margin: 6 }}>
         <SearchBar
@@ -94,15 +93,8 @@ function ListingScreen({ route, navigation }: ListingProps) {
         />
       </View>
       <TitleSmall>Movies</TitleSmall>
-      <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          height: 200,
-        }}
-      >
+      <View style={{ flex: 1 }}>
         <FlatList
-          style={{ flex: 1, marginBottom: 50 }}
           contentContainerStyle={{
             justifyContent: "center",
             alignItems: "stretch",

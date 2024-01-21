@@ -147,6 +147,7 @@ export const useListingHook = (mediaType: MediaType) => {
   return [
     filteredMediaList,
     genreList,
+    genreListLoading,
     toggleGenre,
     searchText,
     setSearchText,

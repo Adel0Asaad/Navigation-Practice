@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { TitleSmall } from "../../../../components/Title";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { SearchBar } from "@rneui/themed";
@@ -20,6 +20,7 @@ function ListingScreen({ route, navigation }: ListingProps) {
   const [
     listMovieFG,
     genreList,
+    genreListLoading,
     toggleGenre,
     searchText,
     setSearchText,
@@ -27,6 +28,7 @@ function ListingScreen({ route, navigation }: ListingProps) {
   ] = useListingHook("Movies") as [
     Movie[],
     MediaGenre[],
+    boolean,
     (id: number) => void,
     string,
     React.Dispatch<React.SetStateAction<string>>,

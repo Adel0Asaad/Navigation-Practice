@@ -20,6 +20,7 @@ function ListingScreen({ route, navigation }: ListingProps) {
   const [
     listSeriesFG,
     genreList,
+    genreListLoading,
     toggleGenre,
     searchText,
     setSearchText,
@@ -27,6 +28,7 @@ function ListingScreen({ route, navigation }: ListingProps) {
   ] = useListingHook("TV") as [
     Series[],
     MediaGenre[],
+    boolean,
     (id: number) => void,
     string,
     React.Dispatch<React.SetStateAction<string>>,

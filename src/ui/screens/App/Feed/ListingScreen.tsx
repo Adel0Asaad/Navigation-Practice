@@ -2,14 +2,25 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { TitleSmall } from "../../../../components/Title";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { SearchBar } from "@rneui/themed";
+import { useEffect, useState } from "react";
 import Colors from "../../../../../util/Colors";
 import GenreItem from "../GenreItem";
 import FlatList2Row from "../../../../components/FlatList2Row";
 import SeriesItem from "./SeriesItem";
+import {
+  getSeriesGenres,
+  getSeriesList,
+} from "../../../../../store/tmdbAPI/apiHelper";
 import { TVStackParamList } from "../../../../../navigation/containers/nativeStack/TVStack";
-import { Series } from "../../../../../backend/Classes/series";
-import { MediaGenre } from "../../../../../backend/Classes/genres";
-import { useListingHook } from "../ListingHelper";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../../store/redux/hooks";
+import {
+  addSeriesList,
+  setSeriesList,
+} from "../../../../../store/redux/slices/seriesSlice";
+import { useDebounce } from "../../../../../util/Debounce";
 
 type ListingProps = NativeStackScreenProps<TVStackParamList, "ListingScreen">;
 
@@ -17,34 +28,59 @@ type ListingProps = NativeStackScreenProps<TVStackParamList, "ListingScreen">;
 //
 
 function ListingScreen({ route, navigation }: ListingProps) {
-  const [
-    listSeriesFG,
-    genreList,
-    toggleGenre,
-    searchText,
-    setSearchText,
-    seriesListScrollEndHandler,
-  ] = useListingHook("TV") as [
-    Series[],
-    MediaGenre[],
-    (id: number) => void,
-    string,
-    React.Dispatch<React.SetStateAction<string>>,
-    () => void
-  ];
+  const [searchText, setSearchText] = useState<string>("");
+  const appliedTextFilter = useDebounce(searchText, 500);
+  const dispatch = useAppDispatch();
+  ///////////////////////// GENRES //////////////////////////
+  const [genreList, genreListError, genreListLoading] = getSeriesGenres();
+
+  const toggleGenre = (id: number) => {
+    setSelectedGenres((prevList) => {
+      return prevList.includes(id)
+        ? prevList.filter((item) => item !== id)
+        : [...prevList, id];
+    });
+  };
+
+  const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
+  const appliedGenreFilter = useDebounce(selectedGenres, 500);
+  ////////////////////////// FILMS //////////////////////////
+
+  const [seriesList, seriesListError, seriesListLoading, fetchSeriesPage] =
+    getSeriesList();
+
+  const [listSeries, setListSeries] = useState(seriesList);
+  const [curPage, setCurPage] = useState<number>(1);
+  const listSeriesFG = useAppSelector((state) => state.seriesData);
+
+  ////////////////////////// FILTERING //////////////////////////
+
+  useEffect(() => {
+    fetchSeriesPage(curPage);
+  }, [curPage]);
+  useEffect(() => {
+    if (appliedGenreFilter.length) {
+    }
+  }, [appliedGenreFilter]);
+  useEffect(() => {
+    dispatch(addSeriesList(seriesList));
+  }, [seriesList]);
+
+  ////////////////////////// FILTERING //////////////////////////
 
   const filmPressedHandler = (id: number) => {
     try {
-      let setSeries = listSeriesFG.find((item) => item.id === id)!;
-      let sentGenreList = genreList.filter((genre) =>
-        setSeries.genre_ids.includes(genre.id)
-      );
       navigation.navigate("DetailsScreen", {
-        series: setSeries,
-        genreList: sentGenreList,
+        series: listSeriesFG.find((item) => item.id === id)!,
       });
     } catch (err: any) {
       console.log(err.message);
+    }
+  };
+
+  const seriesListScrollEndHandler = () => {
+    if (!seriesListLoading) {
+      setCurPage(curPage + 1);
     }
   };
 

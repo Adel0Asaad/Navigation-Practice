@@ -21,11 +21,19 @@ const TVStackComp = () => {
       <TVStack.Screen
         name="ListingScreen"
         component={ListingScreen}
-        options={{headerShown: false}}
+        options={{ title: "Listing Series" }}
       ></TVStack.Screen>
+
       <TVStack.Screen
         name="DetailsScreen"
         component={DetailsScreen}
+        options={{
+          headerTitleStyle: {
+            fontSize: 20,
+            color: Colors.titleColor,
+            fontWeight: "bold",
+          },
+        }}
       ></TVStack.Screen>
     </TVStack.Navigator>
   );

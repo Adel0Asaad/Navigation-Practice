@@ -21,7 +21,7 @@ const MovieStackComp = () => {
       <MovieStack.Screen
         name="ListingScreen"
         component={ListingScreen}
-        options={{ headerShown: false }}
+        options={{title: "Listing Movies"}}
       />
       <MovieStack.Screen name="DetailsScreen" component={DetailsScreen} />
     </MovieStack.Navigator>

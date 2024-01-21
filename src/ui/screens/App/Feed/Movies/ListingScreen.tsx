@@ -1,19 +1,15 @@
-import { FlatList, ScrollView, StyleSheet, View } from "react-native";
-import { Title, TitleSmall } from "../../../../components/Title";
+import { FlatList, StyleSheet, View } from "react-native";
+import { TitleSmall } from "../../../../components/Title";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { MovieStackParamList } from "../../../../../navigation/containers/nativeStack/MovieStack";
 import { SearchBar } from "@rneui/themed";
-import { useEffect, useState } from "react";
 import Colors from "../../../../../util/Colors";
-import { movieGenres, movies } from "../../../../../../data/mocks";
-import {
-  FilmGenre,
-  getListOfGenres,
-  spreadMapToArray,
-} from "../../../../../backend/Classes/genres";
 import GenreItem from "../GenreItem";
 import FlatList2Row from "../../../../components/FlatList2Row";
 import MovieItem from "./MovieItem";
+import { MovieStackParamList } from "../../../../../navigation/containers/nativeStack/MovieStack";
+import { useListingHook } from "../ListingHelper";
+import { Movie } from "../../../../../backend/Classes/movie";
+import { MediaGenre } from "../../../../../backend/Classes/genres";
 
 type ListingProps = NativeStackScreenProps<
   MovieStackParamList,
@@ -21,53 +17,39 @@ type ListingProps = NativeStackScreenProps<
 >;
 
 function ListingScreen({ route, navigation }: ListingProps) {
-  const [searchText, setSearchText] = useState<string>("");
-
-  ///////////////////////// GENRES //////////////////////////
-  const importedGenres = movieGenres;
-  const [genreMap] = useState<Map<number, FilmGenre>>(
-    getListOfGenres(importedGenres)
-  );
-  const listData = spreadMapToArray(genreMap);
-  const toggleGenre = (id: number) => {
-    genreMap.get(id)?.toggle();
-    setSelectedGenres((prevList) => {
-      return prevList.includes(id)
-        ? prevList.filter((item) => item !== id)
-        : [...prevList, id];
-    });
-  };
-  const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
-  ////////////////////////// FILMS //////////////////////////
-  const [listMovie, setListMovie] = useState(movies);
-  const [listMovieFG, setListMovieFG] = useState(movies);
-
-  ////////////////////////// FILTERING //////////////////////////
-
-  useEffect(() => {
-    setListMovie(movies.filter((item) => item.title.includes(searchText)));
-  }, [searchText]);
-  useEffect(() => {
-    if (selectedGenres.length) {
-      setListMovieFG(
-        listMovie.filter((item) =>
-          selectedGenres.some((id) => item.genre_ids.includes(id))
-        )
-      );
-    } else {
-      setListMovieFG(listMovie);
-    }
-  }, [listMovie, selectedGenres]);
-
-  ////////////////////////// FILTERING //////////////////////////
+  const [
+    listMovieFG,
+    genreList,
+    toggleGenre,
+    searchText,
+    setSearchText,
+    movieListScrollEndHandler,
+  ] = useListingHook("Movies") as [
+    Movie[],
+    MediaGenre[],
+    (id: number) => void,
+    string,
+    React.Dispatch<React.SetStateAction<string>>,
+    () => void
+  ];
 
   const filmPressedHandler = (id: number) => {
-    navigation.navigate("DetailsScreen", { movie: id });
+    try {
+      let sentMovie = listMovieFG.find((item) => item.id === id)!;
+      let sentGenreList = genreList.filter((genre) =>
+        sentMovie.genre_ids.includes(genre.id)
+      );
+      navigation.navigate("DetailsScreen", {
+        movie: sentMovie,
+        genreList: sentGenreList,
+      });
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
 
   return (
     <View style={{ flex: 1 }}>
-      <Title>Listing Movies</Title>
       <View style={{ marginTop: 12, margin: 6 }}>
         <SearchBar
           containerStyle={styles.searchBar}
@@ -77,18 +59,12 @@ function ListingScreen({ route, navigation }: ListingProps) {
           onChangeText={(text) => setSearchText(text)}
         />
       </View>
-      <View>
+      <View style={{}}>
         <TitleSmall>Genres</TitleSmall>
         <FlatList2Row
-          data={listData}
+          data={genreList}
           renderItem={({ item }) => {
-            return (
-              <GenreItem
-                id={item.id}
-                genre={item.genre}
-                onPress={toggleGenre}
-              />
-            );
+            return <GenreItem item={item} onPress={toggleGenre} />;
           }}
         />
       </View>
@@ -101,8 +77,8 @@ function ListingScreen({ route, navigation }: ListingProps) {
           }}
           numColumns={2}
           data={listMovieFG}
+          onEndReached={movieListScrollEndHandler}
           renderItem={({ item }) => {
-            console.log("Received: " + item.title);
             return (
               <MovieItem
                 id={item.id}

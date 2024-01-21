@@ -1,1 +1,1 @@
-export type FilmType = "Movies" | "TV"
+export type MediaType = "Movies" | "TV"

@@ -1,41 +1,78 @@
-import { FlatList, Text, View } from "react-native";
-import { Title } from "../../../../components/Title";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { MovieStackParamList } from "../../../../../navigation/containers/nativeStack/MovieStack";
+import { useEffect } from "react";
+import { TVStackParamList } from "../../../../../navigation/containers/nativeStack/TVStack";
+import { baseImgUrl } from "../../../../../backend/constants";
+import Colors from "../../../../../util/Colors";
+import Tuple from "../../../../components/Tuple";
 import { series } from "../../../../../../data/mocks";
 
-type DetailsProps = NativeStackScreenProps<
-  MovieStackParamList,
-  "DetailsScreen"
->;
+type DetailsProps = NativeStackScreenProps<TVStackParamList, "DetailsScreen">;
+
+//
+//
 
 const DetailsScreen = ({ route, navigation }: DetailsProps) => {
-  const id = route.params.movie;
+  const mySeries = route.params.series;
+  const genreList = route.params.genreList;
 
-  const mySeries = series.filter((item) => {
-    return item.id === id;
-  });
+  const genreListString = () => {
+    console.log(mySeries.overview);
+    let arrayString = "";
+    genreList.forEach((genre) => {
+      arrayString += genre.name + ", ";
+    });
+    return (arrayString = arrayString.slice(0, arrayString.length - 2));
+  };
 
-  navigation.setOptions({ title: mySeries![0].name });
+  useEffect(() => {
+    navigation.setOptions({ title: mySeries.name });
+    console.log(baseImgUrl + mySeries.poster_path);
+  }, []);
+
   return (
-    <View>
-      {/* <Title>{mySeries![0].name}</Title> */}
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-        data={mySeries}
-        renderItem={({ item }) => {
-          return (
-            <View>
-              {Object.entries(item).map((item) => (
-                <Text key={item[0]}>{item[0] + ": " + item[1]}</Text>
-              ))}
-            </View>
-          );
-        }}
-      />
+    <View style={styles.rootContainer}>
+      <ScrollView style={{ flex: 1 }}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: Colors.primary500,
+          }}
+        >
+          <View style={styles.imageContainer}>
+            <Image
+              style={styles.image}
+              source={{
+                uri: baseImgUrl + mySeries.poster_path,
+              }}
+            />
+          </View>
+        </View>
+
+        <Tuple title="Name" content={mySeries.name} />
+        <Tuple title="Genres" content={genreListString()} />
+        <Tuple title="Language" content={mySeries.original_language} />
+        <Tuple title="Countries" content={mySeries.origin_country.toString()} />
+        <Tuple title="Overview" content={mySeries.overview} />
+      </ScrollView>
     </View>
   );
 };
 
 export default DetailsScreen;
+
+const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  imageContainer: {
+    height: 400,
+    width: 270,
+  },
+  image: {
+    flex: 1,
+  },
+});

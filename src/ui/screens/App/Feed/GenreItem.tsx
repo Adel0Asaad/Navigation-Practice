@@ -1,29 +1,24 @@
 import { View, Text, Pressable, StyleSheet, Platform } from "react-native";
-import { FilmGenre } from "../../../../backend/Classes/genres";
+import { MediaGenre } from "../../../../backend/Classes/genres";
 import Colors from "../../../../util/Colors";
 import { useState } from "react";
 
 type Props = {
+  item: MediaGenre;
   onPress: (id: number) => void;
 };
 
-function GenreItem(item: {
-  id: number;
-  genre: FilmGenre;
-  onPress: (id: number) => void;
-}) {
+function GenreItem({ onPress, item}: Props) {
   // const handleGenrePress = () => {
   //   console.log("You pressed on: " + item.genre.name)
   // }
 
-    const [selected, setSelected] = useState<boolean>(item.genre.selected)
+  const [selected, setSelected] = useState<boolean>(false);
 
   const helperOnPressHandler = () => {
-    item.onPress(item.id)
-    setSelected(!selected)
+    onPress(item.id);
+    setSelected(!selected);
   };
-
-
 
   return (
     <View
@@ -41,7 +36,7 @@ function GenreItem(item: {
         onPress={helperOnPressHandler}
       >
         <View>
-          <Text style={styles.genreText}>{item.genre.name}</Text>
+          <Text style={styles.genreText}>{item.name}</Text>
         </View>
       </Pressable>
     </View>

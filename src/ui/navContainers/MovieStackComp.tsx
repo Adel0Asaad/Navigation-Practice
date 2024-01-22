@@ -1,6 +1,6 @@
 import { MovieStack } from "../../navigation/containers/nativeStack/MovieStack";
-import ListingScreen from "../screens/App/Feed/Movies/ListingScreen";
-import DetailsScreen from "../screens/App/Feed/Movies/DetailsScreen";
+import ListingScreen from "../screens/App/Home/Movies/ListingScreen";
+import DetailsScreen from "../screens/App/Home/Movies/DetailsScreen";
 import Colors from "../../util/Colors";
 
 const MovieStackComp = () => {
@@ -21,7 +21,7 @@ const MovieStackComp = () => {
       <MovieStack.Screen
         name="ListingScreen"
         component={ListingScreen}
-        options={{title: "Listing Movies"}}
+        options={{title: "Movies"}}
       />
       <MovieStack.Screen name="DetailsScreen" component={DetailsScreen} />
     </MovieStack.Navigator>

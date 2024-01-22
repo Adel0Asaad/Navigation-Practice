@@ -3,16 +3,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import AccountStackComp from "./AccountStackComp";
-import NotificationsStackComp from "./NotificationsStackComp";
-import HomeStackComp from "./HomeStackComp";
 import SettingsStackComp from "./SettingsStackComp";
-import FeedTabsComp from "./FeedTabsComp";
+import HomeTabsComp from "./HomeTabsComp";
+import SearchTabsComp from "./SearchTabsComp";
 
 function AppTabsComp() {
   return (
     <AppTabs.Navigator
-      initialRouteName="HomeStack"
+      initialRouteName="HomeTabs"
       screenOptions={{
         tabBarStyle: { backgroundColor: "#1f1d92" },
         tabBarActiveTintColor: ioniconStyle.activeColor,
@@ -20,46 +18,13 @@ function AppTabsComp() {
       }}
     >
       <AppTabs.Screen
-        name="AccountStack"
-        component={AccountStackComp}
-        options={{
-          lazy: false,
-          title: "Account",
-          tabBarIcon: ({ focused, color, size }) => (
-            <AntDesign
-              name="profile"
-              size={ioniconStyle.size}
-              color={
-                focused ? ioniconStyle.activeColor : ioniconStyle.inactiveColor
-              }
-            />
-          ),
-        }}
-      />
-      <AppTabs.Screen
-        name="NotificationsStack"
-        component={NotificationsStackComp}
-        options={{
-          title: "Notifications",
-          tabBarIcon: ({ focused }) => (
-            <Ionicons
-              name="notifications"
-              size={ioniconStyle.size}
-              color={
-                focused ? ioniconStyle.activeColor : ioniconStyle.inactiveColor
-              }
-            />
-          ),
-        }}
-      />
-      <AppTabs.Screen
-        name="HomeStack"
-        component={HomeStackComp}
+        name="FavTabs"
+        component={HomeTabsComp}
         options={{
           title: "Home",
           tabBarIcon: ({ focused }) => (
-            <Ionicons
-              name="home"
+            <Octicons
+              name="comment"
               size={ioniconStyle.size}
               color={
                 focused ? ioniconStyle.activeColor : ioniconStyle.inactiveColor
@@ -69,8 +34,24 @@ function AppTabsComp() {
         }}
       />
       <AppTabs.Screen
-        name="FeedTabs"
-        component={FeedTabsComp}
+        name="HomeTabs"
+        component={HomeTabsComp}
+        options={{
+          title: "Feed",
+          tabBarIcon: ({ focused }) => (
+            <Octicons
+              name="comment"
+              size={ioniconStyle.size}
+              color={
+                focused ? ioniconStyle.activeColor : ioniconStyle.inactiveColor
+              }
+            />
+          ),
+        }}
+      />
+      <AppTabs.Screen
+        name="SearchTabs"
+        component={SearchTabsComp}
         options={{
           title: "Feed",
           tabBarIcon: ({ focused }) => (

@@ -7,14 +7,14 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AppTabParamList } from "../bottomTab/AppTabs";
 import { RootStackParamList } from "../nativeStack/RootStack";
 
-export type FeedTabParamList = {
+export type FavTabParamList = {
   MovieStack: NavigatorScreenParams<MovieStackParamList>;
   TVStack: NavigatorScreenParams<TVStackParamList>;
 };
-export const FeedTabs = createMaterialTopTabNavigator<FeedTabParamList>();
+export const FavTabs = createMaterialTopTabNavigator<FavTabParamList>();
 
-export type FeedNavigation = CompositeNavigationProp<
-BottomTabNavigationProp<AppTabParamList, "FeedTabs">,
+export type FavNavigation = CompositeNavigationProp<
+BottomTabNavigationProp<AppTabParamList, "FavTabs">,
 NativeStackNavigationProp<RootStackParamList, "AppTabs">
 >;
 

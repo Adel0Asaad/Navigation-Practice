@@ -1,7 +1,7 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { baseUrl } from "../../backend/constants";
-import { MediaGenre } from "../../backend/Classes/genres";
+import { MediaGenre } from "../../models/genres";
+import { axiosClient } from "./apiHelper";
 
 interface ApiResponse {
   genres: MediaGenre[]
@@ -9,10 +9,8 @@ interface ApiResponse {
 
 export const useFetchGenreList = (
   dataUrl: string,
-  options: AxiosRequestConfig,
   initialState: MediaGenre[] | (() => MediaGenre[])
 ): [MediaGenre[], string | null, boolean] => {
-  options.baseURL = baseUrl;
 
   const [data, setData] = useState<MediaGenre[]>(initialState);
   const [fetchError, setFetchError] = useState<string | null>(null);
@@ -25,11 +23,10 @@ export const useFetchGenreList = (
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        options.cancelToken = source.token;
-        const response = await axios.get<ApiResponse>(dataUrl, options);
+        const response = await axiosClient.get<ApiResponse>(dataUrl, {cancelToken: source.token, params: {}});
         if (isMounted) {
           setData(response.data.genres);
-          setFetchError("null");
+          setFetchError(null);
         }
       } catch (err: any) {
         // my first any in typescript sadly :(
@@ -51,11 +48,12 @@ export const useFetchGenreList = (
     fetchData();
 
     const cleanUp = () => {
+      console.log("Cleaning up genres hook...")
       isMounted = false;
       source.cancel();
     };
     return cleanUp;
-  }, [options]);
+  }, []);
 
   return [data, fetchError, isLoading];
 };

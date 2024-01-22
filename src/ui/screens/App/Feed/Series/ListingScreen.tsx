@@ -7,8 +7,8 @@ import GenreItem from "../GenreItem";
 import FlatList2Row from "../../../../components/FlatList2Row";
 import SeriesItem from "./SeriesItem";
 import { TVStackParamList } from "../../../../../navigation/containers/nativeStack/TVStack";
-import { Series } from "../../../../../backend/Classes/series";
-import { MediaGenre } from "../../../../../backend/Classes/genres";
+import { Series } from "../../../../../models/series";
+import { MediaGenre } from "../../../../../models/genres";
 import { useListingHook } from "../ListingHelper";
 
 type ListingProps = NativeStackScreenProps<TVStackParamList, "ListingScreen">;
@@ -63,7 +63,11 @@ function ListingScreen({ route, navigation }: ListingProps) {
       </View>
       <View>
         <TitleSmall>Genres</TitleSmall>
-        <FlatList2Row
+        <FlatList
+          alwaysBounceVertical={false}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
           data={genreList}
           renderItem={({ item }) => {
             return <GenreItem item={item} onPress={toggleGenre} />;

@@ -8,14 +8,12 @@ import NotificationsStackComp from "./NotificationsStackComp";
 import HomeStackComp from "./HomeStackComp";
 import SettingsStackComp from "./SettingsStackComp";
 import FeedTabsComp from "./FeedTabsComp";
-import Colors from "../../util/Colors";
 
 function AppTabsComp() {
   return (
     <AppTabs.Navigator
       initialRouteName="HomeStack"
       screenOptions={{
-        lazy: false,
         tabBarStyle: { backgroundColor: "#1f1d92" },
         tabBarActiveTintColor: ioniconStyle.activeColor,
         headerShown: false,
@@ -25,6 +23,7 @@ function AppTabsComp() {
         name="AccountStack"
         component={AccountStackComp}
         options={{
+          lazy: false,
           title: "Account",
           tabBarIcon: ({ focused, color, size }) => (
             <AntDesign

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Series } from "../../../backend/Classes/series";
+import { Series } from "../../../models/series";
 
 interface SeriesState {
   seriesList: Series[];
@@ -18,14 +18,15 @@ const seriesSlice = createSlice({
       return state;
     },
     addSeriesList: (state, action: PayloadAction<Series[]>) => {
-      const existingIdsSet = new Set(
-        state.seriesList.map((existingSeries) => existingSeries.id)
-      );
-      const listToAdd = action.payload.filter(
-        (series) => !existingIdsSet.has(series.id)
-      );
+      // const existingIdsSet = new Set(
+      //   state.seriesList.map((existingSeries) => existingSeries.id)
+      // );
+      // const listToAdd = action.payload.filter(
+      //   (series) => !existingIdsSet.has(series.id)
+      // );
 
-      state.seriesList = [...state.seriesList, ...listToAdd];
+      // state.seriesList = [...state.seriesList, ...listToAdd]
+      state.seriesList = [...state.seriesList, ...action.payload];
       return state;
     },
     resetSeries: (state) => {

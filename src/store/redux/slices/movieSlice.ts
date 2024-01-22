@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Movie } from "../../../backend/Classes/movie";
+import { Movie } from "../../../models/movie";
 
 interface MovieState {
   movieList: Movie[];
@@ -18,14 +18,15 @@ const movieSlice = createSlice({
       return state;
     },
     addMovieList: (state, action: PayloadAction<Movie[]>) => {
-      const existingIdsSet = new Set(
-        state.movieList.map((existingMovie) => existingMovie.id)
-      );
-      const listToAdd = action.payload.filter(
-        (movie) => !existingIdsSet.has(movie.id)
-      );
+      // const existingIdsSet = new Set(
+      //   state.movieList.map((existingMovie) => existingMovie.id)
+      // );
+      // const listToAdd = action.payload.filter(
+      //   (movie) => !existingIdsSet.has(movie.id)
+      // );
 
-      state.movieList = [...state.movieList, ...listToAdd];
+      // state.movieList = [...state.movieList, ...listToAdd];
+      state.movieList = [...state.movieList, ...action.payload]
       return state;
     },
     resetMovies: (state) => {

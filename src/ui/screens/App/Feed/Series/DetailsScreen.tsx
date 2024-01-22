@@ -2,7 +2,7 @@ import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useEffect } from "react";
 import { TVStackParamList } from "../../../../../navigation/containers/nativeStack/TVStack";
-import { baseImgUrl } from "../../../../../backend/constants";
+import { baseImgUrl } from "../../../../../services/constants";
 import Colors from "../../../../../util/Colors";
 import Tuple from "../../../../components/Tuple";
 import { series } from "../../../../../../data/mocks";

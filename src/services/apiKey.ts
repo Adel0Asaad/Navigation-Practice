@@ -1,0 +1,3 @@
+export const apiKey = "061f655549686cbe9592dc6ada554f16"
+
+const apiReadAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYmMzMTY2NmNlYTdkZTBiMTljMDNkODk0OTM0NWMyZCIsInN1YiI6IjVmNGNmN2QyOWVjZjE4MDAzODk0ZmJkZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.DRcTqBeqr2JSyGxWTQrGpLJlJC_waVsQLh6pbEJrtWQ"

@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Movie } from "../../../backend/Classes/movie";
-import { MediaGenre } from "../../../backend/Classes/genres";
+import { Movie } from "../../../models/movie";
+import { MediaGenre } from "../../../models/genres";
 
 export type MovieStackParamList = {
   ListingScreen: undefined;

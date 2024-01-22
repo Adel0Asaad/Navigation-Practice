@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Series } from "../../../backend/Classes/series";
-import { MediaGenre } from "../../../backend/Classes/genres";
+import { Series } from "../../../models/series";
+import { MediaGenre } from "../../../models/genres";
 
 export type TVStackParamList = {
   ListingScreen: undefined;

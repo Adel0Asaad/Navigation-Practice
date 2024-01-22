@@ -2,7 +2,7 @@ import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { MovieStackParamList } from "../../../../../navigation/containers/nativeStack/MovieStack";
 import { useEffect } from "react";
-import { baseImgUrl } from "../../../../../backend/constants";
+import { baseImgUrl } from "../../../../../services/constants";
 import Colors from "../../../../../util/Colors";
 import Tuple from "../../../../components/Tuple";
 

@@ -8,8 +8,8 @@ import FlatList2Row from "../../../../components/FlatList2Row";
 import MovieItem from "./MovieItem";
 import { MovieStackParamList } from "../../../../../navigation/containers/nativeStack/MovieStack";
 import { useListingHook } from "../ListingHelper";
-import { Movie } from "../../../../../backend/Classes/movie";
-import { MediaGenre } from "../../../../../backend/Classes/genres";
+import { Movie } from "../../../../../models/movie";
+import { MediaGenre } from "../../../../../models/genres";
 
 type ListingProps = NativeStackScreenProps<
   MovieStackParamList,
@@ -63,7 +63,11 @@ function ListingScreen({ route, navigation }: ListingProps) {
       </View>
       <View style={{}}>
         <TitleSmall>Genres</TitleSmall>
-        <FlatList2Row
+        <FlatList
+          alwaysBounceVertical={false}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
           data={genreList}
           renderItem={({ item }) => {
             return <GenreItem item={item} onPress={toggleGenre} />;

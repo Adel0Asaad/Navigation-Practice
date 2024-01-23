@@ -9,13 +9,13 @@ const TVStackComp = () => {
       screenOptions={{
         title: "",
         headerTitleAlign: "center",
-        headerStyle: { backgroundColor: Colors.accent300 },
+        headerStyle: { backgroundColor: Colors.backgroundColor },
         headerTitleStyle: {
           fontWeight: "bold",
           fontSize: 24,
           color: Colors.titleColor,
         },
-        // headerShown: false
+        headerShown: false
       }}
     >
       <TVStack.Screen

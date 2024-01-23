@@ -6,13 +6,15 @@ import { AntDesign } from "@expo/vector-icons";
 import SettingsStackComp from "./SettingsStackComp";
 import HomeTabsComp from "./HomeTabsComp";
 import SearchTabsComp from "./SearchTabsComp";
+import Colors from "../../util/Colors";
 
 function AppTabsComp() {
   return (
     <AppTabs.Navigator
       initialRouteName="HomeTabs"
       screenOptions={{
-        tabBarStyle: { backgroundColor: "#1f1d92" },
+        tabBarStyle: { backgroundColor: Colors.primary500 },
+        tabBarShowLabel: false,
         tabBarActiveTintColor: ioniconStyle.activeColor,
         headerShown: false,
       }}
@@ -21,10 +23,10 @@ function AppTabsComp() {
         name="FavTabs"
         component={HomeTabsComp}
         options={{
-          title: "Home",
+          title: "Favs",
           tabBarIcon: ({ focused }) => (
             <Octicons
-              name="comment"
+              name="heart-fill"
               size={ioniconStyle.size}
               color={
                 focused ? ioniconStyle.activeColor : ioniconStyle.inactiveColor
@@ -40,7 +42,7 @@ function AppTabsComp() {
           title: "Feed",
           tabBarIcon: ({ focused }) => (
             <Octicons
-              name="comment"
+              name="home"
               size={ioniconStyle.size}
               color={
                 focused ? ioniconStyle.activeColor : ioniconStyle.inactiveColor
@@ -56,7 +58,7 @@ function AppTabsComp() {
           title: "Feed",
           tabBarIcon: ({ focused }) => (
             <Octicons
-              name="comment"
+              name="search"
               size={ioniconStyle.size}
               color={
                 focused ? ioniconStyle.activeColor : ioniconStyle.inactiveColor

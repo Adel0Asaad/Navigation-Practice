@@ -1,27 +1,45 @@
-import { View, Text, Pressable, StyleSheet, Platform } from "react-native";
+import { View, Image, Text, Pressable, StyleSheet, Platform } from "react-native";
 import Colors from "../../../../../util/Colors";
+import { baseImgUrl } from "../../../../../services/constants";
+import { Series } from "../../../../../models/series";
 
-function SeriesItem(item: {
-  id: number;
-  genre_ids: number[];
-  name: string;
+type Props = {
+  mySeries: Series;
   onPress: (id: number) => void;
-}) {
+};
+
+function SeriesItem({ mySeries, onPress }: Props) {
   const helperOnPressHandler = () => {
-    item.onPress(item.id);
+    onPress(mySeries.id);
   };
 
   return (
-    <View style={styles.genreItem}>
+    <View style={styles.rootContainer}>
       <Pressable
         style={({ pressed }) =>
           pressed ? [styles.button, styles.pressedStyle] : styles.button
         }
-        android_ripple={{ color: Colors.accent500 }}
+        android_ripple={{ color: Colors.primary600 }}
         onPress={helperOnPressHandler}
       >
-        <View>
-          <Text style={styles.genreText}>{item.name}</Text>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: baseImgUrl + mySeries.poster_path,
+            }}
+          />
+        </View>
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "stretch",
+            padding: 10,
+          }}
+        >
+          <Text numberOfLines={1} style={styles.movieText}>
+            {mySeries.name}
+          </Text>
         </View>
       </Pressable>
     </View>
@@ -29,14 +47,13 @@ function SeriesItem(item: {
 }
 
 const styles = StyleSheet.create({
-  genreItem: {
+  rootContainer: {
     flex: 1,
     margin: 8,
-    height: 75,
-    width: 150,
+    height: 240,
     justifyContent: "center",
     alignItems: "stretch",
-    backgroundColor: Colors.accent300,
+    backgroundColor: Colors.primary500,
     borderRadius: 8,
     elevation: 4,
     shadowColor: "black",
@@ -48,20 +65,26 @@ const styles = StyleSheet.create({
   pressedStyle: {
     opacity: 0.75,
   },
-  genreItemSelected: {
-    backgroundColor: Colors.accent500,
+  movieItemSelected: {
+    backgroundColor: Colors.primary600,
     opacity: 0.75,
   },
-  genreText: {
-    color: "#694c4c",
-    fontSize: 20,
+  movieText: {
+    color: "white",
+    fontSize: 16,
     fontWeight: "bold",
-    textAlign: "center",
+    textAlign: "left",
   },
   button: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "stretch",
+  },
+  imageContainer: {
+    flex: 4,
+  },
+  image: {
+    flex: 1,
   },
 });
 

@@ -20,7 +20,7 @@ function GenreItem({ onPress, item }: Props) {
     <View
       style={
         selected
-          ? [styles.genreItem, { backgroundColor: Colors.accent500 }]
+          ? [styles.genreItem, { backgroundColor: Colors.primary600 }]
           : styles.genreItem
       }
     >
@@ -28,7 +28,7 @@ function GenreItem({ onPress, item }: Props) {
         style={({ pressed }) =>
           pressed ? [styles.button, styles.pressedStyle] : styles.button
         }
-        android_ripple={{ color: Colors.accent500 }}
+        android_ripple={{ color: Colors.primary600 }}
         onPress={helperOnPressHandler}
       >
         <View>
@@ -42,12 +42,11 @@ function GenreItem({ onPress, item }: Props) {
 const styles = StyleSheet.create({
   genreItem: {
     flex: 1,
-    margin: 8,
-    height: 75,
-    width: 150,
+    margin: 4,
+    height: 25,
     justifyContent: "center",
     alignItems: "stretch",
-    backgroundColor: Colors.accent300,
+    backgroundColor: Colors.primary500,
     borderRadius: 8,
     elevation: 4,
     shadowColor: "black",
@@ -60,12 +59,12 @@ const styles = StyleSheet.create({
     opacity: 0.75,
   },
   genreItemSelected: {
-    backgroundColor: Colors.accent500,
+    backgroundColor: Colors.primary600,
     opacity: 0.75,
   },
   genreText: {
-    color: "#694c4c",
-    fontSize: 20,
+    color: "white",
+    fontSize: 14,
     fontWeight: "bold",
     textAlign: "center",
   },
@@ -73,6 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 10,
   },
 });
 

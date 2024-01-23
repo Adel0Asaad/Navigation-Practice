@@ -1,15 +1,13 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
-import { TitleSmall } from "../../../../components/Title";
+import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { SearchBar } from "@rneui/themed";
 import Colors from "../../../../../util/Colors";
 import GenreItem from "../GenreItem";
-import FlatList2Row from "../../../../components/FlatList2Row";
 import MovieItem from "./MovieItem";
 import { MovieStackParamList } from "../../../../../navigation/containers/nativeStack/MovieStack";
 import { useListingHook } from "../ListingHelper";
 import { Movie } from "../../../../../models/movie";
 import { MediaGenre } from "../../../../../models/genres";
+import MediaLoaderSkele from "../../../../components/MediaLoaderSkele";
 
 type ListingProps = NativeStackScreenProps<
   MovieStackParamList,
@@ -19,6 +17,7 @@ type ListingProps = NativeStackScreenProps<
 function ListingScreen({ route, navigation }: ListingProps) {
   const [
     listMovieFG,
+    mediaListLoading,
     genreList,
     genreListLoading,
     toggleGenre,
@@ -27,6 +26,7 @@ function ListingScreen({ route, navigation }: ListingProps) {
     movieListScrollEndHandler,
   ] = useListingHook("Movies") as [
     Movie[],
+    boolean,
     MediaGenre[],
     boolean,
     (id: number) => void,
@@ -51,18 +51,9 @@ function ListingScreen({ route, navigation }: ListingProps) {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ marginTop: 12, margin: 6 }}>
-        <SearchBar
-          containerStyle={styles.searchBar}
-          inputContainerStyle={[styles.searchBar, styles.searchInput]}
-          placeholder={"Search Movies..."}
-          value={searchText}
-          onChangeText={(text) => setSearchText(text)}
-        />
-      </View>
-      <View style={{}}>
-        <TitleSmall>Genres</TitleSmall>
+    <View style={styles.rootContainer}>
+      <View style={{ marginTop: 12, margin: 6 }}></View>
+      <View style={{ marginBottom: 6 }}>
         <FlatList
           alwaysBounceVertical={false}
           showsVerticalScrollIndicator={false}
@@ -74,27 +65,36 @@ function ListingScreen({ route, navigation }: ListingProps) {
           }}
         />
       </View>
-      <TitleSmall>Movies</TitleSmall>
       <View style={{ flex: 1 }}>
-        <FlatList
-          contentContainerStyle={{
-            justifyContent: "center",
-            alignItems: "stretch",
-          }}
-          numColumns={2}
-          data={listMovieFG}
-          onEndReached={movieListScrollEndHandler}
-          renderItem={({ item }) => {
-            return (
-              <MovieItem
-                id={item.id}
-                genre_ids={item.genre_ids}
-                title={item.title}
-                onPress={filmPressedHandler.bind(item.id)}
-              />
-            );
-          }}
-        />
+        {listMovieFG.length ? (
+          <>
+            {/* <ActivityIndicator size="large" animating={mediaListLoading} /> */}
+            <FlatList
+              contentContainerStyle={{
+                justifyContent: "center",
+                alignItems: "stretch",
+              }}
+              numColumns={2}
+              data={listMovieFG}
+              onEndReached={movieListScrollEndHandler}
+              renderItem={({ item }) => {
+                return (
+                  <MovieItem
+                    myMovie={item}
+                    onPress={filmPressedHandler.bind(item.id)}
+                  />
+                );
+              }}
+            />
+            <ActivityIndicator
+              style={styles.loading}
+              size="large"
+              animating={mediaListLoading}
+            />
+          </>
+        ) : (
+          <MediaLoaderSkele />
+        )}
       </View>
     </View>
   );
@@ -103,16 +103,20 @@ function ListingScreen({ route, navigation }: ListingProps) {
 export default ListingScreen;
 
 const styles = StyleSheet.create({
-  searchBar: {
-    borderRadius: 30,
-    overflow: "hidden",
-    borderWidth: 1,
-    borderColor: Colors.primary500,
-    backgroundColor: Colors.primary500,
-    color: "#120438",
-    width: "100%",
+  rootContainer: {
+    flex: 1,
+    backgroundColor: Colors.backgroundColor,
   },
   searchInput: {
     backgroundColor: Colors.primary800,
+  },
+  loading: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

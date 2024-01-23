@@ -21,8 +21,8 @@ function LoginScreen() {
     if (username !== "") {
       dispatch(login(username));
       navigation.navigate("AppTabs", {
-        screen: "HomeStack",
-        params: { screen: "HomeScreen" },
+        screen: "HomeTabs",
+        params: { screen: "MovieStack", params: { screen: "ListingScreen" } },
       });
     } else {
       Alert.alert(

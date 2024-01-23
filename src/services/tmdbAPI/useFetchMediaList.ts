@@ -37,13 +37,6 @@ export const useFetchMediaList = <S>(
     setOptions((oldOptions) => {
       let newOptions = {...oldOptions}
       newOptions.params.page = page ?? oldOptions.params.page;
-
-      // if filter text exists, empty out genres.
-      // if not, put them back in.
-      // filterText === ""
-      //   ? (oldOptions.params.with_genres = "")
-      //   : (oldOptions.params.with_genres =
-      //       genreList?.toString() ?? oldOptions.params.with_genres);
       newOptions.params.with_genres = genreList?.toString() ?? oldOptions.params.with_genres;
       newOptions.params.query = filterText ?? oldOptions.params.query;
 

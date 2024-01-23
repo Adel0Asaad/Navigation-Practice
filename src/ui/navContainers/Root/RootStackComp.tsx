@@ -1,7 +1,7 @@
-import { RootStack } from "../../navigation/containers/nativeStack/RootStack";
-import Colors from "../../util/Colors";
-import AppTabsComp from "./AppTabsComp";
-import AuthStackComp from "./AuthStackComp";
+import { RootStack } from "../../../navigation/containers/nativeStack/RootStack";
+import Colors from "../../../util/Colors";
+import AppTabsComp from "../App/AppTabsComp";
+import AuthStackComp from "../Auth/AuthStackComp";
 
 function RootStackComp() {
   return (

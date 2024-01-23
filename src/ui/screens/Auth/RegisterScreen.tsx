@@ -8,23 +8,28 @@ import { useAppNavigation } from "../../../navigation/appNav";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../../navigation/containers/nativeStack/AuthStack";
 
-type Props = NativeStackScreenProps<AuthStackParamList, "RegisterScreen">
+type Props = NativeStackScreenProps<AuthStackParamList, "RegisterScreen">;
 
-function RegisterScreen({route}: Props) {
-  const navigation = useAppNavigation()
-  console.log(route.params?.username)
-  const [username, setUsername] = useState<string>(route.params?.username ?? "")
+function RegisterScreen({ route }: Props) {
+  const navigation = useAppNavigation();
+  console.log(route.params?.username);
+  const [username, setUsername] = useState<string>(
+    route.params?.username ?? ""
+  );
   const dispatch = useAppDispatch();
 
   function usernameTextHandler(text: string) {
-    setUsername(text)
+    setUsername(text);
   }
-  
+
   function dispatchLogin() {
     console.log(username);
     if (username !== "") {
       dispatch(login(username));
-      navigation.navigate("AppTabs", {screen: "HomeStack", params:{screen: "HomeScreen"}});
+      navigation.navigate("AppTabs", {
+        screen: "HomeTabs",
+        params: { screen: "MovieStack", params: { screen: "ListingScreen" } },
+      });
     } else {
       Alert.alert(
         "Invalid username",

@@ -1,7 +1,7 @@
-import { TVStack } from "../../navigation/containers/nativeStack/TVStack";
-import Colors from "../../util/Colors";
-import DetailsScreen from "../screens/App/Home/Series/DetailsScreen";
-import ListingScreen from "../screens/App/Home/Series/ListingScreen";
+import { TVStack } from "../../../../navigation/containers/nativeStack/TVStack";
+import Colors from "../../../../util/Colors";
+import DetailsScreen from "../../../screens/App/Search/Series/DetailsScreen";
+import ListingScreen from "../../../screens/App/Search/Series/ListingScreen";
 
 const TVStackComp = () => {
   return (

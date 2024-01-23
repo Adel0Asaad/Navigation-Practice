@@ -7,7 +7,7 @@ import { ImageBackground, StyleSheet } from "react-native";
 import Colors from "./src/util/Colors";
 import { Provider } from "react-redux";
 import { store } from "./src/store/redux/store";
-import RootStackComp from "./src/ui/navContainers/RootStackComp";
+import RootStackComp from "./src/ui/navContainers/Root/RootStackComp";
 
 
 // function RootStack() {

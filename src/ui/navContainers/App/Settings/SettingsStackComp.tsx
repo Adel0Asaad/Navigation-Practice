@@ -1,7 +1,7 @@
-import SettingsDetailsScreen from "../screens/App/Settings/SettingsDetailsScreen";
-import SettingsScreen from "../screens/App/Settings/SettingsScreen";
-import { SettingsStack } from "../../navigation/containers/nativeStack/SettingsStack";
-import Colors from "../../util/Colors";
+import SettingsDetailsScreen from "../../../screens/App/Settings/SettingsDetailsScreen";
+import SettingsScreen from "../../../screens/App/Settings/SettingsScreen";
+import { SettingsStack } from "../../../../navigation/containers/nativeStack/SettingsStack";
+import Colors from "../../../../util/Colors";
 
 function SettingsStackComp() {
   return (

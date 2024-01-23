@@ -1,5 +1,5 @@
-import { HomeTabs } from "../../navigation/containers/materialTopTab/HomeTabs";
-import Colors from "../../util/Colors";
+import { HomeTabs } from "../../../../navigation/containers/materialTopTab/HomeTabs";
+import Colors from "../../../../util/Colors";
 import MovieStackComp from "./MovieStackComp";
 import TVStackComp from "./TVStackComp";
 import Constants from "expo-constants";
@@ -14,11 +14,19 @@ function HomeTabsComp() {
         tabBarStyle: {
           backgroundColor: Colors.primary500,
         },
-        tabBarActiveTintColor: "#FFFFFF"
+        tabBarActiveTintColor: "#FFFFFF",
       }}
     >
-      <HomeTabs.Screen name="MovieStack" options={{title: "Movies"}} component={MovieStackComp} />
-      <HomeTabs.Screen name="TVStack" options={{title: "Series"}} component={TVStackComp} />
+      <HomeTabs.Screen
+        name="MovieStack"
+        options={{ title: "Movies" }}
+        component={MovieStackComp}
+      />
+      <HomeTabs.Screen
+        name="TVStack"
+        options={{ title: "Series" }}
+        component={TVStackComp}
+      />
     </HomeTabs.Navigator>
   );
 }

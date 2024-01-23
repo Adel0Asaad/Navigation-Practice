@@ -31,6 +31,10 @@ export const discoverMovieUrl = "/discover/movie";
 
 export const discoverSeriesUrl = "/discover/tv";
 
+export const searchMovieUrl = "/search/movie"
+
+export const searchSeriesUrl = "/search/tv"
+
 export const movieGenresUrl = "/genre/movie/list";
 
 export const seriesGenresUrl = "/genre/tv/list";

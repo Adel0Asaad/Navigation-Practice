@@ -1,12 +1,13 @@
-import { AppTabs } from "../../navigation/containers/bottomTab/AppTabs";
+import { AppTabs } from "../../../navigation/containers/bottomTab/AppTabs";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import SettingsStackComp from "./SettingsStackComp";
-import HomeTabsComp from "./HomeTabsComp";
-import SearchTabsComp from "./SearchTabsComp";
-import Colors from "../../util/Colors";
+import SettingsStackComp from "./Settings/SettingsStackComp";
+import HomeTabsComp from "./Home/HomeTabsComp";
+import SearchTabsComp from "./Search/SearchTabsComp";
+import Colors from "../../../util/Colors";
+import FavTabsComp from "./Fav/FavTabsComp";
 
 function AppTabsComp() {
   return (
@@ -21,7 +22,7 @@ function AppTabsComp() {
     >
       <AppTabs.Screen
         name="FavTabs"
-        component={HomeTabsComp}
+        component={FavTabsComp}
         options={{
           title: "Favs",
           tabBarIcon: ({ focused }) => (

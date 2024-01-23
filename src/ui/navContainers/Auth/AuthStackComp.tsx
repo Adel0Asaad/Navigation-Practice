@@ -1,7 +1,7 @@
-import LoginScreen from "../screens/Auth/LoginScreen";
-import RegisterScreen from "../screens/Auth/RegisterScreen";
-import { AuthStack } from "../../navigation/containers/nativeStack/AuthStack";
-import Colors from "../../util/Colors";
+import LoginScreen from "../../screens/Auth/LoginScreen";
+import RegisterScreen from "../../screens/Auth/RegisterScreen";
+import { AuthStack } from "../../../navigation/containers/nativeStack/AuthStack";
+import Colors from "../../../util/Colors";
 
 function AuthStackComp() {
   return (

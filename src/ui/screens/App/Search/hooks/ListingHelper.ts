@@ -1,45 +1,31 @@
 import { useEffect, useState } from "react";
-import { useDebounce } from "../../../../util/Debounce";
-import { useAppDispatch, useAppSelector } from "../../../../store/redux/hooks";
-import { MediaType } from "../../../../services/types";
+import { useDebounce } from "../../../../../util/Debounce";
+import { MediaType } from "../../../../../services/types";
 import {
-  discoverMovieUrl,
-  discoverSeriesUrl,
   movieGenresUrl,
+  searchMovieUrl,
+  searchSeriesUrl,
   seriesGenresUrl,
-} from "../../../../services/tmdbAPI/apiHelper";
-import { useFetchMediaList } from "../../../../services/tmdbAPI/useFetchMediaList";
-import { Movie } from "../../../../models/movie";
-import { Series } from "../../../../models/series";
-import {
-  addMovieList,
-  setMovieList,
-} from "../../../../store/redux/slices/movieSlice";
-import {
-  addSeriesList,
-  setSeriesList,
-} from "../../../../store/redux/slices/seriesSlice";
-import { useFetchGenreList } from "../../../../services/tmdbAPI/useFetchGenreList";
-import { MediaGenre } from "../../../../models/genres";
+} from "../../../../../services/tmdbAPI/apiHelper";
+import { useFetchMediaList } from "../../../../../services/tmdbAPI/useFetchMediaList";
+import { Movie } from "../../../../../models/movie";
+import { Series } from "../../../../../models/series";
+import { useFetchGenreList } from "../../../../../services/tmdbAPI/useFetchGenreList";
 
 export const useListingHook = (mediaType: MediaType) => {
   //
 
   ////////////////////////// MTYPE //////////////////////////
   const isMediaMovies = mediaType === "Movies";
-  const setMediaList = (listToBeSet: ArrayLike<Movie | Series>) => {
-    isMediaMovies
-      ? dispatch(setMovieList(listToBeSet as Movie[]))
-      : dispatch(setSeriesList(listToBeSet as Series[]));
-  };
+
   const addMediaList = () => {
-    isMediaMovies
-      ? dispatch(addMovieList(mediaList as Movie[]))
-      : dispatch(addSeriesList(mediaList as Series[]));
+    setMediaList((prevList) => {
+      return [...prevList, ...mediaList] as Movie[] | Series[];
+    });
   };
-  const mediaUrl = isMediaMovies ? discoverMovieUrl : discoverSeriesUrl;
+
+  const mediaUrl = isMediaMovies ? searchMovieUrl : searchSeriesUrl;
   const genresUrl = isMediaMovies ? movieGenresUrl : seriesGenresUrl;
-  const dispatch = useAppDispatch();
   ////////////////////////// MTYPE //////////////////////////
 
   //
@@ -49,7 +35,7 @@ export const useListingHook = (mediaType: MediaType) => {
     curPage: number;
     selectedGenres?: number[];
     searchText?: string;
-  }>({curPage: 1});
+  }>({ curPage: 1 });
   ////////////////////////// UI-Info //////////////////////////
   ////////////////////////// PAGES //////////////////////////
   const mediaListScrollEndHandler = () => {
@@ -65,8 +51,18 @@ export const useListingHook = (mediaType: MediaType) => {
   };
 
   useEffect(() => {
-    if (UIParams.selectedGenres !== undefined && UIParams.searchText !== undefined) {
-      console.log("Loading data!")
+    console.log(
+      "search text: [" +
+        UIParams.searchText +
+        "] && / " +
+        (UIParams.searchText !== undefined).toString()
+    );
+    if (
+      UIParams.selectedGenres !== undefined &&
+      UIParams.searchText !== undefined
+    ) {
+      console.log("Looooooading data!");
+      console.log("Searching for: " + UIParams.searchText);
       loadMedia(UIParams.curPage, UIParams.selectedGenres, UIParams.searchText);
     }
   }, [UIParams]);
@@ -110,9 +106,7 @@ export const useListingHook = (mediaType: MediaType) => {
     ? useFetchMediaList<Movie>(mediaUrl, [])
     : useFetchMediaList<Series>(mediaUrl, []);
 
-  const filteredMediaList = useAppSelector((state) =>
-    isMediaMovies ? state.movieData.movieList : state.seriesData.seriesList
-  );
+  const [filteredMediaList, setMediaList] = useState<Movie[] | Series[]>([]);
   useEffect(() => {
     if (mediaList.length) {
       console.log("Adding media list");

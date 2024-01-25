@@ -1,13 +1,12 @@
-import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Colors from "../../../../../util/Colors";
-import GenreItem from "../GenreItem";
-import MovieItem from "./MovieItem";
+import GenreItem from "../../../../components/GenreItem"; 
 import { MovieStackParamList } from "../../../../../navigation/containers/nativeStack/MovieStack";
-import { useListingHook } from "../ListingHelper";
+import { useListingHook } from "../hooks/ListingHelper";
 import { Movie } from "../../../../../models/movie";
 import { MediaGenre } from "../../../../../models/genres";
-import MediaLoaderSkele from "../../../../components/MediaLoaderSkele";
+import MediaList from "../../../../components/MediaList";
 
 type ListingProps = NativeStackScreenProps<
   MovieStackParamList,
@@ -17,22 +16,18 @@ type ListingProps = NativeStackScreenProps<
 function ListingScreen({ route, navigation }: ListingProps) {
   const [
     listMovieFG,
-    mediaListLoading,
     genreList,
     genreListLoading,
     toggleGenre,
     searchText,
     setSearchText,
-    movieListScrollEndHandler,
   ] = useListingHook("Movies") as [
     Movie[],
-    boolean,
     MediaGenre[],
     boolean,
     (id: number) => void,
     string,
-    React.Dispatch<React.SetStateAction<string>>,
-    () => void
+    React.Dispatch<React.SetStateAction<string>>
   ];
 
   const filmPressedHandler = (id: number) => {
@@ -42,7 +37,7 @@ function ListingScreen({ route, navigation }: ListingProps) {
         sentMovie.genre_ids.includes(genre.id)
       );
       navigation.navigate("DetailsScreen", {
-        movie: sentMovie,
+        media: sentMovie,
         genreList: sentGenreList,
       });
     } catch (err: any) {
@@ -66,35 +61,12 @@ function ListingScreen({ route, navigation }: ListingProps) {
         />
       </View>
       <View style={{ flex: 1 }}>
-        {listMovieFG.length ? (
-          <>
-            {/* <ActivityIndicator size="large" animating={mediaListLoading} /> */}
-            <FlatList
-              contentContainerStyle={{
-                justifyContent: "center",
-                alignItems: "stretch",
-              }}
-              numColumns={2}
-              data={listMovieFG}
-              onEndReached={movieListScrollEndHandler}
-              renderItem={({ item }) => {
-                return (
-                  <MovieItem
-                    myMovie={item}
-                    onPress={filmPressedHandler.bind(item.id)}
-                  />
-                );
-              }}
-            />
-            <ActivityIndicator
-              style={styles.loading}
-              size="large"
-              animating={mediaListLoading}
-            />
-          </>
-        ) : (
-          <MediaLoaderSkele />
-        )}
+        <MediaList
+          mediaList={listMovieFG}
+          mediaListLoading={false}
+          onItemPress={filmPressedHandler}
+          instructionText="Add some movies to your favorites!"
+        />
       </View>
     </View>
   );
@@ -109,14 +81,5 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     backgroundColor: Colors.primary800,
-  },
-  loading: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: "center",
-    justifyContent: "center",
   },
 });

@@ -1,16 +1,25 @@
-import { View, Image, Text, Pressable, StyleSheet, Platform } from "react-native";
-import Colors from "../../../../../util/Colors";
-import { baseImgUrl } from "../../../../../services/constants";
-import { Series } from "../../../../../models/series";
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  Platform,
+  Image,
+} from "react-native";
+import Colors from "../../util/Colors";
+import { baseImgUrl } from "../../services/constants";
+import { Movie } from "../../models/movie";
+import { Series } from "../../models/series";
 
 type Props = {
-  mySeries: Series;
+  myMedia: Movie | Series;
   onPress: (id: number) => void;
 };
 
-function SeriesItem({ mySeries, onPress }: Props) {
+function MediaItem({ myMedia, onPress }: Props) {
+  const isMovie = Object.keys(myMedia).includes("title");
   const helperOnPressHandler = () => {
-    onPress(mySeries.id);
+    onPress(myMedia.id);
   };
 
   return (
@@ -26,7 +35,7 @@ function SeriesItem({ mySeries, onPress }: Props) {
           <Image
             style={styles.image}
             source={{
-              uri: baseImgUrl + mySeries.poster_path,
+              uri: baseImgUrl + myMedia.poster_path,
             }}
           />
         </View>
@@ -38,7 +47,7 @@ function SeriesItem({ mySeries, onPress }: Props) {
           }}
         >
           <Text numberOfLines={1} style={styles.movieText}>
-            {mySeries.name}
+            {isMovie ? (myMedia as Movie).title : (myMedia as Series).name}
           </Text>
         </View>
       </Pressable>
@@ -88,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SeriesItem;
+export default MediaItem;

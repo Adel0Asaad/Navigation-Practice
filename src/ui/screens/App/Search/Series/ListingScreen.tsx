@@ -1,13 +1,12 @@
-import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Colors from "../../../../../util/Colors";
-import SeriesItem from "./SeriesItem";
 import { TVStackParamList } from "../../../../../navigation/containers/nativeStack/TVStack";
 import { Series } from "../../../../../models/series";
 import { MediaGenre } from "../../../../../models/genres";
-import { useListingHook } from "../ListingHelper";
-import MediaLoaderSkele from "../../../../components/MediaLoaderSkele";
+import { useListingHook } from "../hooks/ListingHelper";
 import { SearchBar } from "@rneui/themed";
+import MediaList from "../../../../components/MediaList";
 
 type ListingProps = NativeStackScreenProps<TVStackParamList, "ListingScreen">;
 
@@ -15,6 +14,7 @@ type ListingProps = NativeStackScreenProps<TVStackParamList, "ListingScreen">;
 //
 
 function ListingScreen({ route, navigation }: ListingProps) {
+
   const [
     listSeriesFG,
     mediaListLoading,
@@ -37,12 +37,12 @@ function ListingScreen({ route, navigation }: ListingProps) {
 
   const filmPressedHandler = (id: number) => {
     try {
-      let setSeries = listSeriesFG.find((item) => item.id === id)!;
+      let sentSeries = listSeriesFG.find((item) => item.id === id)!;
       let sentGenreList = genreList.filter((genre) =>
-        setSeries.genre_ids.includes(genre.id)
+        sentSeries.genre_ids.includes(genre.id)
       );
       navigation.navigate("DetailsScreen", {
-        series: setSeries,
+        media: sentSeries,
         genreList: sentGenreList,
       });
     } catch (err: any) {
@@ -61,34 +61,12 @@ function ListingScreen({ route, navigation }: ListingProps) {
         onChangeText={(text) => setSearchText(text)}
       />
       <View style={{ flex: 1 }}>
-        {listSeriesFG.length ? (
-          <>
-            <FlatList
-              contentContainerStyle={{
-                justifyContent: "center",
-                alignItems: "stretch",
-              }}
-              numColumns={2}
-              data={listSeriesFG}
-              onEndReached={seriesListScrollEndHandler}
-              renderItem={({ item }) => {
-                return (
-                  <SeriesItem
-                    mySeries={item}
-                    onPress={filmPressedHandler.bind(item.id)}
-                  />
-                );
-              }}
-            />
-            <ActivityIndicator
-              style={styles.loading}
-              size={"large"}
-              animating={mediaListLoading}
-            />
-          </>
-        ) : (
-          <MediaLoaderSkele />
-        )}
+        <MediaList
+          mediaList={listSeriesFG}
+          mediaListLoading={mediaListLoading}
+          onItemPress={filmPressedHandler}
+          onEndReached={seriesListScrollEndHandler}
+        />
       </View>
     </View>
   );

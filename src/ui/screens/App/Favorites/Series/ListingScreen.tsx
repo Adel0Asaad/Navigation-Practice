@@ -1,13 +1,14 @@
-import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Colors from "../../../../../util/Colors";
-import GenreItem from "../GenreItem";
-import SeriesItem from "./SeriesItem";
+import GenreItem from "../../../../components/GenreItem"; 
 import { TVStackParamList } from "../../../../../navigation/containers/nativeStack/TVStack";
 import { Series } from "../../../../../models/series";
 import { MediaGenre } from "../../../../../models/genres";
-import { useListingHook } from "../ListingHelper";
-import MediaLoaderSkele from "../../../../components/MediaLoaderSkele";
+import { useListingHook } from "../hooks/ListingHelper";
+import MediaList from "../../../../components/MediaList";
+import { useEffect } from "react";
+import { getAllKeys, removeSeries } from "../../../../../store/persisted/asyncStorageHelper";
 
 type ListingProps = NativeStackScreenProps<TVStackParamList, "ListingScreen">;
 
@@ -15,34 +16,45 @@ type ListingProps = NativeStackScreenProps<TVStackParamList, "ListingScreen">;
 //
 
 function ListingScreen({ route, navigation }: ListingProps) {
+  useEffect(() => {
+    removeSeries(609681)
+    console.log("Hello??????");
+    getAllKeys()
+      .then((value) => {
+        console.log("Please say something");
+        console.log(value?.seriesKeys);
+      })
+      .catch((reason) => {
+        console.log(reason.message);
+      })
+      .finally(() => {
+        console.log("Finally...");
+      });
+  }, []);
   const [
     listSeriesFG,
-    mediaListLoading,
     genreList,
     genreListLoading,
     toggleGenre,
     searchText,
     setSearchText,
-    seriesListScrollEndHandler,
   ] = useListingHook("TV") as [
     Series[],
-    boolean,
     MediaGenre[],
     boolean,
     (id: number) => void,
     string,
-    React.Dispatch<React.SetStateAction<string>>,
-    () => void
+    React.Dispatch<React.SetStateAction<string>>
   ];
 
   const filmPressedHandler = (id: number) => {
     try {
-      let setSeries = listSeriesFG.find((item) => item.id === id)!;
+      let senntSeries = listSeriesFG.find((item) => item.id === id)!;
       let sentGenreList = genreList.filter((genre) =>
-        setSeries.genre_ids.includes(genre.id)
+        senntSeries.genre_ids.includes(genre.id)
       );
       navigation.navigate("DetailsScreen", {
-        series: setSeries,
+        media: senntSeries,
         genreList: sentGenreList,
       });
     } catch (err: any) {
@@ -66,34 +78,12 @@ function ListingScreen({ route, navigation }: ListingProps) {
         />
       </View>
       <View style={{ flex: 1 }}>
-        {listSeriesFG.length ? (
-          <>
-            <FlatList
-              contentContainerStyle={{
-                justifyContent: "center",
-                alignItems: "stretch",
-              }}
-              numColumns={2}
-              data={listSeriesFG}
-              onEndReached={seriesListScrollEndHandler}
-              renderItem={({ item }) => {
-                return (
-                  <SeriesItem
-                    mySeries={item}
-                    onPress={filmPressedHandler.bind(item.id)}
-                  />
-                );
-              }}
-            />
-            <ActivityIndicator
-              style={styles.loading}
-              size={"large"}
-              animating={mediaListLoading}
-            />
-          </>
-        ) : (
-          <MediaLoaderSkele />
-        )}
+        <MediaList
+          mediaList={listSeriesFG}
+          mediaListLoading={false}
+          onItemPress={filmPressedHandler}
+          instructionText="Add some movies to your favorites!"
+        />
       </View>
     </View>
   );
@@ -108,14 +98,5 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     backgroundColor: Colors.primary800,
-  },
-  loading: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: "center",
-    justifyContent: "center",
   },
 });

@@ -1,12 +1,12 @@
-import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Colors from "../../../../../util/Colors";
-import GenreItem from "../GenreItem";
-import MovieItem from "./MovieItem";
+import GenreItem from "../../../../components/GenreItem";
 import { MovieStackParamList } from "../../../../../navigation/containers/nativeStack/MovieStack";
-import { useListingHook } from "../ListingHelper";
+import { useListingHook } from "../hooks/ListingHelper";
 import { Movie } from "../../../../../models/movie";
 import { MediaGenre } from "../../../../../models/genres";
+import MediaList from "../../../../components/MediaList";
 import MediaLoaderSkele from "../../../../components/MediaLoaderSkele";
 
 type ListingProps = NativeStackScreenProps<
@@ -42,7 +42,7 @@ function ListingScreen({ route, navigation }: ListingProps) {
         sentMovie.genre_ids.includes(genre.id)
       );
       navigation.navigate("DetailsScreen", {
-        movie: sentMovie,
+        media: sentMovie,
         genreList: sentGenreList,
       });
     } catch (err: any) {
@@ -66,35 +66,13 @@ function ListingScreen({ route, navigation }: ListingProps) {
         />
       </View>
       <View style={{ flex: 1 }}>
-        {listMovieFG.length ? (
-          <>
-            {/* <ActivityIndicator size="large" animating={mediaListLoading} /> */}
-            <FlatList
-              contentContainerStyle={{
-                justifyContent: "center",
-                alignItems: "stretch",
-              }}
-              numColumns={2}
-              data={listMovieFG}
-              onEndReached={movieListScrollEndHandler}
-              renderItem={({ item }) => {
-                return (
-                  <MovieItem
-                    myMovie={item}
-                    onPress={filmPressedHandler.bind(item.id)}
-                  />
-                );
-              }}
-            />
-            <ActivityIndicator
-              style={styles.loading}
-              size="large"
-              animating={mediaListLoading}
-            />
-          </>
-        ) : (
-          <MediaLoaderSkele />
-        )}
+        <MediaList
+          mediaList={listMovieFG}
+          mediaListLoading={mediaListLoading}
+          onItemPress={filmPressedHandler}
+          onEndReached={movieListScrollEndHandler}
+          placeholder={<MediaLoaderSkele />}
+        />
       </View>
     </View>
   );

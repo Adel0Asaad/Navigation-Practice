@@ -4,15 +4,20 @@ import Colors from "../../util/Colors";
 const MediaLoaderSkele = () => {
   return (
     <ScrollView>
-      <View style={{ flexDirection: "row" }}>
-        <HollowMediaItem></HollowMediaItem>
-        <HollowMediaItem></HollowMediaItem>
-      </View>
-      <View style={{ flexDirection: "row" }}>
-        <HollowMediaItem></HollowMediaItem>
-        <HollowMediaItem></HollowMediaItem>
-      </View>
+      <HollowRow />
+      <HollowRow />
+      <HollowRow />
+      <HollowRow />
     </ScrollView>
+  );
+};
+
+const HollowRow = () => {
+  return (
+    <View style={{ flexDirection: "row" }}>
+      <HollowMediaItem></HollowMediaItem>
+      <HollowMediaItem></HollowMediaItem>
+    </View>
   );
 };
 

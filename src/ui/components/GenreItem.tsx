@@ -1,6 +1,6 @@
 import { View, Text, Pressable, StyleSheet, Platform } from "react-native";
-import { MediaGenre } from "../../../../models/genres";
-import Colors from "../../../../util/Colors";
+import { MediaGenre } from "../../models/genres";
+import Colors from "../../util/Colors";
 import { useState } from "react";
 
 type Props = {

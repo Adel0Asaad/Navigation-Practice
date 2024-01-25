@@ -51,6 +51,7 @@ export const useFetchMediaList = <S>(
         const response = await axiosClient.get<MediaApiResponse<S>>(dataUrl, options);
         if (isMounted) {
           console.log("Received data of: " + dataUrl)
+          console.log(response.data.results[0] ? true : false)
           setData(response.data.results);
           setFetchError(null);
         }

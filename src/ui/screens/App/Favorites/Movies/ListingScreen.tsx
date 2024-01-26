@@ -7,6 +7,7 @@ import { useListingHook } from "../hooks/ListingHelper";
 import { Movie } from "../../../../../models/movie";
 import { MediaGenre } from "../../../../../models/genres";
 import MediaList from "../../../../components/MediaList";
+import { SearchBar } from "@rneui/themed";
 
 type ListingProps = NativeStackScreenProps<
   MovieStackParamList,
@@ -48,6 +49,13 @@ function ListingScreen({ route, navigation }: ListingProps) {
   return (
     <View style={styles.rootContainer}>
       <View style={{ marginTop: 12, margin: 6 }}></View>
+      <SearchBar
+        containerStyle={styles.searchBar}
+        inputContainerStyle={styles.searchBar}
+        placeholder={"Search Movies..."}
+        value={searchText}
+        onChangeText={(text) => setSearchText(text)}
+      />
       <View style={{ marginBottom: 6 }}>
         <FlatList
           alwaysBounceVertical={false}
@@ -79,7 +87,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.backgroundColor,
   },
-  searchInput: {
-    backgroundColor: Colors.primary800,
+  searchBar: {
+    borderRadius: 30,
+    overflow: "hidden",
+    borderWidth: 1,
+    borderColor: Colors.primary500,
+    backgroundColor: Colors.primary500,
+    color: "#120438",
+    width: "100%",
   },
 });

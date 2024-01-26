@@ -9,6 +9,7 @@ import { useListingHook } from "../hooks/ListingHelper";
 import MediaList from "../../../../components/MediaList";
 import { useEffect } from "react";
 import { getAllKeys, removeSeries } from "../../../../../store/persisted/asyncStorageHelper";
+import { SearchBar } from "@rneui/themed";
 
 type ListingProps = NativeStackScreenProps<TVStackParamList, "ListingScreen">;
 
@@ -16,21 +17,6 @@ type ListingProps = NativeStackScreenProps<TVStackParamList, "ListingScreen">;
 //
 
 function ListingScreen({ route, navigation }: ListingProps) {
-  useEffect(() => {
-    removeSeries(609681)
-    console.log("Hello??????");
-    getAllKeys()
-      .then((value) => {
-        console.log("Please say something");
-        console.log(value?.seriesKeys);
-      })
-      .catch((reason) => {
-        console.log(reason.message);
-      })
-      .finally(() => {
-        console.log("Finally...");
-      });
-  }, []);
   const [
     listSeriesFG,
     genreList,
@@ -65,6 +51,13 @@ function ListingScreen({ route, navigation }: ListingProps) {
   return (
     <View style={styles.rootContainer}>
       <View style={{ marginTop: 12, margin: 6 }}></View>
+      <SearchBar
+        containerStyle={styles.searchBar}
+        inputContainerStyle={styles.searchBar}
+        placeholder={"Search Movies..."}
+        value={searchText}
+        onChangeText={(text) => setSearchText(text)}
+      />
       <View style={{ marginBottom: 6 }}>
         <FlatList
           alwaysBounceVertical={false}
@@ -82,7 +75,7 @@ function ListingScreen({ route, navigation }: ListingProps) {
           mediaList={listSeriesFG}
           mediaListLoading={false}
           onItemPress={filmPressedHandler}
-          instructionText="Add some movies to your favorites!"
+          instructionText="Add some series to your favorites!"
         />
       </View>
     </View>
@@ -96,7 +89,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.backgroundColor,
   },
-  searchInput: {
-    backgroundColor: Colors.primary800,
+  searchBar: {
+    borderRadius: 30,
+    overflow: "hidden",
+    borderWidth: 1,
+    borderColor: Colors.primary500,
+    backgroundColor: Colors.primary500,
+    color: "#120438",
+    width: "100%",
   },
 });

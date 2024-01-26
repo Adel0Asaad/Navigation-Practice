@@ -39,7 +39,7 @@ const MediaList = ({
         data={mediaList}
         onEndReached={onEndReached}
         ListFooterComponent={
-          <ActivityIndicator size="large" animating={mediaListLoading} />
+          <ActivityIndicator size="large" animating={mediaListLoading && mediaList.length > 0} />
         }
         renderItem={({ item }) => {
           return (

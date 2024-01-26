@@ -23,6 +23,15 @@ export const useListingHook = (mediaType: MediaType) => {
 
   //
 
+  ////////////////////////// UI-Info //////////////////////////
+  const [UIParams, setUIParams] = useState<{
+    selectedGenres: number[];
+    searchText: string;
+  }>({ selectedGenres: [], searchText: "" });
+  ////////////////////////// UI-Info //////////////////////////
+
+  //
+
   ////////////////////////// GENRES //////////////////////////
   const [genreList, genreListError, genreListLoading] = useFetchGenreList(
     genresUrl,
@@ -38,6 +47,14 @@ export const useListingHook = (mediaType: MediaType) => {
         : [...prevList, id];
     });
   };
+
+  useEffect(() => {
+    setUIParams((prevParams) => {
+      let newParams = { ...prevParams };
+      newParams.selectedGenres = appliedGenreFilter;
+      return newParams;
+    });
+  }, [appliedGenreFilter]);
   ////////////////////////// GENRES //////////////////////////
 
   //
@@ -45,10 +62,11 @@ export const useListingHook = (mediaType: MediaType) => {
   ////////////////////////// MEDIA ///////////////////////////
   useEffect(() => {
     isMediaMovies
-      ? getMovies().then((movieList) => setFilteredMediaList(movieList!))
-      : getSeries().then((seriesList) => setFilteredMediaList(seriesList!));
+      ? getMovies().then((movieList) => setIMediaList(movieList!))
+      : getSeries().then((seriesList) => setIMediaList(seriesList!));
   }); // loads mediaList
 
+  const [iMediaList, setIMediaList] = useState<Movie[] | Series[]>([]);
   const [filteredMediaList, setFilteredMediaList] = useState<
     Movie[] | Series[]
   >([]);
@@ -59,7 +77,38 @@ export const useListingHook = (mediaType: MediaType) => {
   ////////////////////////// SEARCH //////////////////////////
   const [searchText, setSearchText] = useState("");
   const appliedTextFilter = useDebounce(searchText, 500);
+
+  useEffect(() => {
+    setUIParams((prevParams) => {
+      let newParams = { ...prevParams };
+      newParams.searchText = appliedTextFilter;
+      return newParams;
+    });
+  }, [appliedTextFilter]);
   ////////////////////////// SEARCH //////////////////////////
+
+  useEffect(() => {
+    let filteredByGenre = UIParams.selectedGenres.length
+      ? iMediaList.filter((media) =>
+          UIParams.selectedGenres.every((id) => media.genre_ids.includes(id))
+        )
+      : iMediaList;
+
+    let filteredByText =
+      UIParams.searchText !== ""
+        ? filteredByGenre.filter((media) =>
+            isMediaMovies
+              ? (media as Movie).title
+                  .toLowerCase()
+                  .includes(UIParams.searchText.toLowerCase())
+              : (media as Series).name
+                  .toLowerCase()
+                  .includes(UIParams.searchText.toLowerCase())
+          )
+        : filteredByGenre;
+
+    setFilteredMediaList(filteredByText as Movie[] | Series[]);
+  }, [UIParams, iMediaList]);
 
   /////////////////////////////////////////////////////////////// DEBUGGING ///////////////////////////////////////////////////////////////
   useEffect(() => {

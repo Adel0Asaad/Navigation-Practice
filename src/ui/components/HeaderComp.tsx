@@ -1,28 +1,39 @@
 import { useState, useEffect } from "react";
 import { Dimensions, Pressable, StyleSheet, View, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { Fontisto } from '@expo/vector-icons';
-import { getAllKeys, removeMovie, removeSeries, storeMovie, storeSeries } from "../../store/persisted/asyncStorageHelper";
+import { Fontisto } from "@expo/vector-icons";
+import {
+  getAllKeys,
+  removeMovie,
+  removeSeries,
+  storeMovie,
+  storeSeries,
+} from "../../store/persisted/asyncStorageHelper";
 import { Series } from "../../models/series";
 import { Movie } from "../../models/movie";
 import { useAppDispatch } from "../../store/redux/hooks";
 import { syncFav } from "../../store/redux/slices/favSlice";
+import { useAppNavigation } from "../../navigation/appNav";
 
 const windowDimensions = Dimensions.get("window");
 const screenDimensions = Dimensions.get("screen");
 
 type Props = {
   isMovie: boolean;
-  mediaItem: Movie | Series
+  mediaItem: Movie | Series;
 };
 
-const HeaderComp = ({isMovie, mediaItem }: Props) => {
+const HeaderComp = ({ isMovie, mediaItem }: Props) => {
   const [isFav, setIsFav] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const [dimensions, setDimensions] = useState({
     window: windowDimensions,
     screen: screenDimensions,
   });
+  const navigation = useAppNavigation()
+  const navCallBack = () => {
+    navigation.goBack()
+  }
 
   useEffect(() => {
     // credits to https://reactnative.dev/docs/dimensions
@@ -92,7 +103,7 @@ const HeaderComp = ({isMovie, mediaItem }: Props) => {
       position: "absolute",
       left: 0,
       right: 0,
-      top: 0,
+      top: 35,
       bottom: 0,
       padding: 24,
     },
@@ -101,7 +112,7 @@ const HeaderComp = ({isMovie, mediaItem }: Props) => {
   return (
     <View style={[styles.rootContainer, styles.headerAbs]}>
       <View style={[styles.center]}>
-        <Pressable>
+        <Pressable onPress={navCallBack}>
           <Fontisto name="angle-left" size={26} color="white" />
         </Pressable>
       </View>

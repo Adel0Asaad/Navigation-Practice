@@ -1,4 +1,4 @@
-import { View } from "react-native"
+import { StyleSheet, View } from "react-native"
 import WelcomeText from "../../../components/WelcomeText"
 import PrimaryButton from "../../../components/PrimaryButton"
 import { useAppNavigation } from "../../../../navigation/appNav"
@@ -11,7 +11,7 @@ function SettingsScreen(){
     }
 
     return (
-        <View>
+        <View style={styles.rootContainer}>
             <WelcomeText />
             <PrimaryButton onPress={settingsNavHandler}>Settings Details</PrimaryButton>
         </View>
@@ -19,3 +19,11 @@ function SettingsScreen(){
 }
 
 export default SettingsScreen
+
+const styles = StyleSheet.create({
+    rootContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    }
+})

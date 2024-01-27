@@ -1,8 +1,6 @@
 import { AppTabs } from "../../../navigation/containers/bottomTab/AppTabs";
-import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
 import SettingsStackComp from "./Settings/SettingsStackComp";
 import HomeTabsComp from "./Home/HomeTabsComp";
 import SearchTabsComp from "./Search/SearchTabsComp";

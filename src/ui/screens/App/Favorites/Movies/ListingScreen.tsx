@@ -56,7 +56,7 @@ function ListingScreen({ route, navigation }: ListingProps) {
         value={searchText}
         onChangeText={(text) => setSearchText(text)}
       />
-      <View style={{ marginBottom: 6 }}>
+      <View>
         <FlatList
           alwaysBounceVertical={false}
           showsVerticalScrollIndicator={false}

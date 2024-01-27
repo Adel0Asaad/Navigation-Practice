@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     margin: 8,
-    height: 240,
+    height: 280,
     justifyContent: "center",
     alignItems: "stretch",
     backgroundColor: Colors.primary500,

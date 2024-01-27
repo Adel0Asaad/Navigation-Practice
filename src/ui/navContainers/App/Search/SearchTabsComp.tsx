@@ -18,6 +18,7 @@ const getTabBarStyle = (route: RouteProp<SearchTabParamList>) => {
       return { height: 0, width: 0 };
     default:
       return {
+        paddingTop: Constants.statusBarHeight,
         backgroundColor: Colors.primary500,
       };
   }
@@ -26,9 +27,9 @@ const getTabBarStyle = (route: RouteProp<SearchTabParamList>) => {
 function SearchTabsComp() {
   return (
     <SearchTabs.Navigator
-      style={{
-        marginTop: Constants.statusBarHeight,
-      }}
+      // style={{
+      //   paddingTop: Constants.statusBarHeight,
+      // }}
       screenOptions={{
         tabBarStyle: {
           backgroundColor: Colors.primary500,

@@ -18,6 +18,7 @@ const getTabBarStyle = (route: RouteProp<FavTabParamList>) => {
       return { height: 0, width: 0 };
     default:
       return {
+        paddingTop: Constants.statusBarHeight,
         backgroundColor: Colors.primary500,
       };
   }
@@ -26,9 +27,9 @@ const getTabBarStyle = (route: RouteProp<FavTabParamList>) => {
 function FavTabsComp() {
   return (
     <FavTabs.Navigator
-      style={{
-        marginTop: Constants.statusBarHeight,
-      }}
+      // style={{
+      //   marginTop: Constants.statusBarHeight,
+      // }}
       screenOptions={{
         tabBarStyle: {
           backgroundColor: Colors.primary500,

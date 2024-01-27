@@ -9,34 +9,35 @@ import { Provider } from "react-redux";
 import { store } from "./src/store/redux/store";
 import RootStackComp from "./src/ui/navContainers/Root/RootStackComp";
 
-
 // function RootStack() {
 //   const logged = useAppSelector((state) => state.userData.logged)
-//   // return <></> 
+//   // return <></>
 //   return logged ? <AppTabsComp /> : <AuthStackComp />;
 
 // }
 
 export default function App() {
   return (
-    // <LinearGradient
-    //   style={styles.rootScreen}
-    //   colors={[Colors.primary800, Colors.accent500]}
-    // >
-    //   <StatusBar style="dark" />
-    //   <ImageBackground
-    //     source={require("./assets/images/background2.jpg")}
-    //     resizeMode="cover"
-    //     style={styles.rootScreen}
-    //     imageStyle={styles.backgroundImage}
-    //   >
-        <Provider store={store} >
-          <NavigationContainer  >
-            <RootStackComp />
-          </NavigationContainer>
-        </Provider>
-    //   </ImageBackground>
-    // </LinearGradient>
+    <>
+      <StatusBar translucent={true} backgroundColor="transparent" style="light" />
+      {/* // <LinearGradient */}
+      {/* //   style={styles.rootScreen} */}
+      {/* //   colors={[Colors.primary800, Colors.accent500]} */}
+      {/* // > */}
+      {/* //   <ImageBackground */}
+      {/* //     source={require("./assets/images/background2.jpg")} */}
+      {/* //     resizeMode="cover" */}
+      {/* //     style={styles.rootScreen} */}
+      {/* //     imageStyle={styles.backgroundImage} */}
+      {/* //   > */}
+      <Provider store={store}>
+        <NavigationContainer>
+          <RootStackComp />
+        </NavigationContainer>
+      </Provider>
+      {/* //   </ImageBackground> */}
+      {/* // </LinearGradient> */}
+    </>
   );
 }
 

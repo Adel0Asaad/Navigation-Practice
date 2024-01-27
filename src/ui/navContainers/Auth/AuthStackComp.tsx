@@ -9,7 +9,8 @@ function AuthStackComp() {
       screenOptions={{
         title: "",
         headerTitleAlign: "center",
-        headerStyle: { backgroundColor: Colors.accent300 },
+        headerStyle: { backgroundColor: Colors.primary500 },
+        headerTintColor: "white"
       }}
     >
       <AuthStack.Screen

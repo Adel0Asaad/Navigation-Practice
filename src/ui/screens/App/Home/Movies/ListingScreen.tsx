@@ -53,7 +53,7 @@ function ListingScreen({ route, navigation }: ListingProps) {
   return (
     <View style={styles.rootContainer}>
       <View style={{ marginTop: 12, margin: 6 }}></View>
-      <View style={{ marginBottom: 6 }}>
+      <View>
         <FlatList
           alwaysBounceVertical={false}
           showsVerticalScrollIndicator={false}

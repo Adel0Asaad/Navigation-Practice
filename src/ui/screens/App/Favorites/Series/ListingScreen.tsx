@@ -52,11 +52,11 @@ function ListingScreen({ route, navigation }: ListingProps) {
       <SearchBar
         containerStyle={styles.searchBar}
         inputContainerStyle={styles.searchBar}
-        placeholder={"Search Movies..."}
+        placeholder={"Search Series..."}
         value={searchText}
         onChangeText={(text) => setSearchText(text)}
       />
-      <View style={{ marginBottom: 6 }}>
+      <View>
         <FlatList
           alwaysBounceVertical={false}
           showsVerticalScrollIndicator={false}

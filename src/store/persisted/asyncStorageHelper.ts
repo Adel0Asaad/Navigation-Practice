@@ -64,6 +64,7 @@ export const getAllKeys = async () => {
 export const getMovies = async () => {
   try {
     const keys = await AsyncStorage.getAllKeys();
+    console.log("aaa: " + keys)
     const movieKeys = keys.filter((key) => key.split(`/`)[0] === "movie");
 
     const movieEntries = await AsyncStorage.multiGet(movieKeys);
@@ -86,8 +87,10 @@ export const getMovies = async () => {
 };
 
 export const getSeries = async () => {
+  console.log("Getting series")
   try {
     const keys = await AsyncStorage.getAllKeys();
+    console.log("bbb: " + keys)
     const seriesKeys = keys.filter((key) => key.split(`/`)[0] === "series");
 
     const seriesEntries = await AsyncStorage.multiGet(seriesKeys);

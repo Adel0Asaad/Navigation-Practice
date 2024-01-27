@@ -1,26 +1,11 @@
-import { Ionicons, Entypo, AntDesign } from "@expo/vector-icons";
-import {
-  View,
-  ScrollView,
-  Pressable,
-  Image,
-  Text,
-  StyleSheet,
-} from "react-native";
+import { Ionicons, Entypo } from "@expo/vector-icons";
+import { View, ScrollView, Image, Text, StyleSheet } from "react-native";
 import { baseImgUrl } from "../../services/constants";
 import { Movie } from "../../models/movie";
 import { Series } from "../../models/series";
 import { MediaGenre } from "../../models/genres";
 import Colors from "../../util/Colors";
-import { useEffect, useState } from "react";
-import {
-  getAllKeys,
-  removeMovie,
-  removeSeries,
-  storeMovie,
-  storeSeries,
-} from "../../store/persisted/asyncStorageHelper";
-import { useAppDispatch } from "../../store/redux/hooks";
+import HeaderComp from "./HeaderComp";
 
 type Props = {
   mediaItem: Movie | Series;
@@ -29,38 +14,6 @@ type Props = {
 
 const DetailsScreenComp = ({ mediaItem, genreList }: Props) => {
   const isMovie = Object.keys(mediaItem).includes("title");
-  const [isFav, setIsFav] = useState<boolean>(false);
-  
-  const favCallback = () => {
-    if (isFav) {
-      isMovie 
-      ? removeMovie(mediaItem.id) 
-      : removeSeries(mediaItem.id);
-    } else {
-      isMovie
-        ? storeMovie(mediaItem as Movie)
-        : storeSeries(mediaItem as Series);
-    }
-    setIsFav(!isFav);
-  };
-
-  useEffect(() => {
-    getAllKeys().then((allKeys) => {
-      if (isMovie) {
-        allKeys?.movieKeys.find(
-          (key) => mediaItem.id.toString() === key.split(`/`)[1]
-        )
-          ? setIsFav(true)
-          : null;
-      } else {
-        allKeys?.seriesKeys.find(
-          (key) => mediaItem.id.toString() === key.split(`/`)[1]
-        )
-          ? setIsFav(true)
-          : null;
-      }
-    });
-  }, []);
 
   return (
     <View style={styles.rootContainer}>
@@ -108,15 +61,7 @@ const DetailsScreenComp = ({ mediaItem, genreList }: Props) => {
         </View>
         <Text style={styles.overviewText}>{mediaItem.overview}</Text>
       </ScrollView>
-      <View style={styles.loading}>
-        <Pressable onPress={favCallback}>
-          <AntDesign
-            name={isFav ? "heart" : "hearto"}
-            size={32}
-            color={"yellow"}
-          />
-        </Pressable>
-      </View>
+      <HeaderComp isMovie={isMovie} mediaItem={mediaItem} />
     </View>
   );
 };
@@ -175,18 +120,7 @@ const styles = StyleSheet.create({
   genreText: { color: "#b3b3b3", paddingRight: 6 },
   overviewText: {
     color: "white",
-
     padding: 16,
-  },
-  loading: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    padding: 24,
-    alignItems: "flex-end",
-    justifyContent: "flex-start",
   },
 });
 

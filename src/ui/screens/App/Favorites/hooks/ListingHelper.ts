@@ -12,6 +12,7 @@ import {
   getMovies,
   getSeries,
 } from "../../../../../store/persisted/asyncStorageHelper";
+import { useAppSelector } from "../../../../../store/redux/hooks";
 
 export const useListingHook = (mediaType: MediaType) => {
   //
@@ -19,6 +20,7 @@ export const useListingHook = (mediaType: MediaType) => {
   ////////////////////////// MTYPE //////////////////////////
   const isMediaMovies = mediaType === "Movies";
   const genresUrl = isMediaMovies ? movieGenresUrl : seriesGenresUrl;
+  const favRefresh = useAppSelector((state) => state.favRefresh);
   ////////////////////////// MTYPE //////////////////////////
 
   //
@@ -64,7 +66,7 @@ export const useListingHook = (mediaType: MediaType) => {
     isMediaMovies
       ? getMovies().then((movieList) => setIMediaList(movieList!))
       : getSeries().then((seriesList) => setIMediaList(seriesList!));
-  }); // loads mediaList
+  }, [favRefresh]); // loads mediaList
 
   const [iMediaList, setIMediaList] = useState<Movie[] | Series[]>([]);
   const [filteredMediaList, setFilteredMediaList] = useState<

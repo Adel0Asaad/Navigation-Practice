@@ -2,6 +2,7 @@ import { MovieStack } from "../../../../navigation/containers/nativeStack/MovieS
 import ListingScreen from "../../../screens/App/Favorites/Movies/ListingScreen";
 import DetailsScreen from "../../../screens/App/Favorites/Movies/DetailsScreen";
 import Colors from "../../../../util/Colors";
+import { View } from "react-native";
 
 const MovieStackComp = () => {
   return (
@@ -9,7 +10,7 @@ const MovieStackComp = () => {
       screenOptions={{
         headerTitle: "",
         headerTitleAlign: "center",
-        headerStyle: { backgroundColor: Colors.backgroundColor},
+        headerStyle: { backgroundColor: Colors.backgroundColor },
         headerBackVisible: true,
         headerTintColor: "#FFFFFF",
         headerTitleStyle: {
@@ -17,16 +18,25 @@ const MovieStackComp = () => {
           fontSize: 24,
           color: Colors.titleColor,
         },
-        headerShown: false
       }}
     >
       <MovieStack.Screen
         name="ListingScreen"
         component={ListingScreen}
-        options={{title: "Movies", 
+        options={{
+          title: "Movies",
+          headerShown: false,
+          // header: () => <View style={{height: 200, width: "100%", backgroundColor: "red"}}/>,
         }}
       />
-      <MovieStack.Screen name="DetailsScreen" component={DetailsScreen} />
+      <MovieStack.Screen
+        name="DetailsScreen"
+        component={DetailsScreen}
+        options={{ 
+          title: "Details", 
+          header: () => <></> 
+        }}
+      />
     </MovieStack.Navigator>
   );
 };

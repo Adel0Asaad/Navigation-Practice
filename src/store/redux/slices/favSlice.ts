@@ -2,10 +2,10 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const favSlice = createSlice({
   name: "favState",
-  initialState: false,
+  initialState: true,
   reducers: {
-    syncFav: (_state, action: PayloadAction<boolean>) => {
-      return action.payload;
+    syncFav: (state) => {
+      return !state;
     },
   },
 });

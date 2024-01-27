@@ -3,12 +3,10 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Colors from "../../../../../util/Colors";
 import GenreItem from "../../../../components/GenreItem"; 
 import { TVStackParamList } from "../../../../../navigation/containers/nativeStack/TVStack";
+import { useListingHook } from "../hooks/ListingHelper";
 import { Series } from "../../../../../models/series";
 import { MediaGenre } from "../../../../../models/genres";
-import { useListingHook } from "../hooks/ListingHelper";
 import MediaList from "../../../../components/MediaList";
-import { useEffect } from "react";
-import { getAllKeys, removeSeries } from "../../../../../store/persisted/asyncStorageHelper";
 import { SearchBar } from "@rneui/themed";
 
 type ListingProps = NativeStackScreenProps<TVStackParamList, "ListingScreen">;
@@ -35,12 +33,12 @@ function ListingScreen({ route, navigation }: ListingProps) {
 
   const filmPressedHandler = (id: number) => {
     try {
-      let senntSeries = listSeriesFG.find((item) => item.id === id)!;
+      let sentSeries = listSeriesFG.find((item) => item.id === id)!;
       let sentGenreList = genreList.filter((genre) =>
-        senntSeries.genre_ids.includes(genre.id)
+        sentSeries.genre_ids.includes(genre.id)
       );
       navigation.navigate("DetailsScreen", {
-        media: senntSeries,
+        media: sentSeries,
         genreList: sentGenreList,
       });
     } catch (err: any) {

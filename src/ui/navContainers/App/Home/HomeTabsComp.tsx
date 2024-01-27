@@ -1,8 +1,27 @@
-import { HomeTabs } from "../../../../navigation/containers/materialTopTab/HomeTabs";
+import {
+  RouteProp,
+  getFocusedRouteNameFromRoute,
+} from "@react-navigation/native";
+import {
+  HomeTabParamList,
+  HomeTabs,
+} from "../../../../navigation/containers/materialTopTab/HomeTabs";
 import Colors from "../../../../util/Colors";
 import MovieStackComp from "./MovieStackComp";
 import TVStackComp from "./TVStackComp";
 import Constants from "expo-constants";
+
+const getTabBarStyle = (route: RouteProp<HomeTabParamList>) => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? "ListingScreen";
+  switch (routeName) {
+    case "DetailsScreen":
+      return { height: 0, width: 0 };
+    default:
+      return {
+        backgroundColor: Colors.primary500,
+      };
+  }
+};
 
 function HomeTabsComp() {
   return (
@@ -19,12 +38,18 @@ function HomeTabsComp() {
     >
       <HomeTabs.Screen
         name="MovieStack"
-        options={{ title: "Movies" }}
+        options={({ route }) => ({
+          title: "Movies",
+          tabBarStyle: getTabBarStyle(route),
+        })}
         component={MovieStackComp}
       />
       <HomeTabs.Screen
         name="TVStack"
-        options={{ title: "Series" }}
+        options={({ route }) => ({
+          title: "Series",
+          tabBarStyle: getTabBarStyle(route),
+        })}
         component={TVStackComp}
       />
     </HomeTabs.Navigator>

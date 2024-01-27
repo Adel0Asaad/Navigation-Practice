@@ -1,8 +1,27 @@
-import { FavTabs } from "../../../../navigation/containers/materialTopTab/FavTabs";
+import {
+  RouteProp,
+  getFocusedRouteNameFromRoute,
+} from "@react-navigation/native";
+import {
+  FavTabParamList,
+  FavTabs,
+} from "../../../../navigation/containers/materialTopTab/FavTabs";
 import Colors from "../../../../util/Colors";
 import MovieStackComp from "./MovieStackComp";
 import TVStackComp from "./TVStackComp";
 import Constants from "expo-constants";
+
+const getTabBarStyle = (route: RouteProp<FavTabParamList>) => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? "ListingScreen";
+  switch (routeName) {
+    case "DetailsScreen":
+      return { height: 0, width: 0 };
+    default:
+      return {
+        backgroundColor: Colors.primary500,
+      };
+  }
+};
 
 function FavTabsComp() {
   return (
@@ -19,12 +38,18 @@ function FavTabsComp() {
     >
       <FavTabs.Screen
         name="MovieStack"
-        options={{ title: "Movies" }}
+        options={({ route }) => ({
+          title: "Movies",
+          tabBarStyle: getTabBarStyle(route),
+        })}
         component={MovieStackComp}
       />
       <FavTabs.Screen
         name="TVStack"
-        options={{ title: "Series" }}
+        options={({ route }) => ({
+          title: "Series",
+          tabBarStyle: getTabBarStyle(route),
+        })}
         component={TVStackComp}
       />
     </FavTabs.Navigator>

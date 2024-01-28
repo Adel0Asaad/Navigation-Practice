@@ -1,5 +1,5 @@
 import { AppTabs } from "../../../navigation/containers/bottomTab/AppTabs";
-import { MaterialIcons } from "@expo/vector-icons";
+import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
 import SettingsStackComp from "./Settings/SettingsStackComp";
 import HomeTabsComp from "./Home/HomeTabsComp";
@@ -19,13 +19,13 @@ function AppTabsComp() {
       }}
     >
       <AppTabs.Screen
-        name="FavTabs"
-        component={FavTabsComp}
+        name="HomeTabs"
+        component={HomeTabsComp}
         options={{
-          title: "Favs",
+          title: "Feed",
           tabBarIcon: ({ focused }) => (
-            <Octicons
-              name="heart-fill"
+            <Ionicons
+              name={focused ? "home-sharp":"home-outline"}
               size={ioniconStyle.size}
               color={
                 focused ? ioniconStyle.activeColor : ioniconStyle.inactiveColor
@@ -35,13 +35,13 @@ function AppTabsComp() {
         }}
       />
       <AppTabs.Screen
-        name="HomeTabs"
-        component={HomeTabsComp}
+        name="FavTabs"
+        component={FavTabsComp}
         options={{
-          title: "Feed",
+          title: "Favs",
           tabBarIcon: ({ focused }) => (
-            <Octicons
-              name="home"
+            <AntDesign
+              name={focused ? "heart" : "hearto"}
               size={ioniconStyle.size}
               color={
                 focused ? ioniconStyle.activeColor : ioniconStyle.inactiveColor
@@ -90,6 +90,7 @@ export default AppTabsComp;
 
 const ioniconStyle = {
   size: 24,
-  activeColor: "#e8ecf3",
-  inactiveColor: "#707783",
+  // activeColor: "#e8ecf3",
+  activeColor: "#d22c4c",
+  inactiveColor: "#9da3ad",
 };

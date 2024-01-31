@@ -7,33 +7,17 @@ const TVStackComp = () => {
   return (
     <TVStack.Navigator
       screenOptions={{
-        title: "",
-        headerTitleAlign: "center",
-        headerStyle: { backgroundColor: Colors.backgroundColor },
-        headerTitleStyle: {
-          fontWeight: "bold",
-          fontSize: 24,
-          color: Colors.titleColor,
-        },
-        headerShown: false
+        headerShown: false,
       }}
     >
       <TVStack.Screen
         name="ListingScreen"
         component={ListingScreen}
-        options={{ title: "Listing Series" }}
       ></TVStack.Screen>
 
       <TVStack.Screen
         name="DetailsScreen"
         component={DetailsScreen}
-        options={{
-          headerTitleStyle: {
-            fontSize: 20,
-            color: Colors.titleColor,
-            fontWeight: "bold",
-          },
-        }}
       ></TVStack.Screen>
     </TVStack.Navigator>
   );

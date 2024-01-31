@@ -10,12 +10,13 @@ import Colors from "../../../../util/Colors";
 import MovieStackComp from "./MovieStackComp";
 import TVStackComp from "./TVStackComp";
 import Constants from "expo-constants";
+import { StyleProp, ViewStyle } from "react-native";
 
-const getTabBarStyle = (route: RouteProp<HomeTabParamList>) => {
+const getTabBarStyle = (route: RouteProp<HomeTabParamList>): StyleProp<ViewStyle> => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? "ListingScreen";
   switch (routeName) {
     case "DetailsScreen":
-      return { height: 0, width: 0 };
+      return { height: 0, width: 0, zIndex: -1 };
     default:
       return {
         paddingTop: Constants.statusBarHeight,

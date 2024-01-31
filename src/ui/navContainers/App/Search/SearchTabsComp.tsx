@@ -10,12 +10,13 @@ import Colors from "../../../../util/Colors";
 import MovieStackComp from "./MovieStackComp";
 import TVStackComp from "./TVStackComp";
 import Constants from "expo-constants";
+import { StyleProp, ViewStyle } from "react-native";
 
-const getTabBarStyle = (route: RouteProp<SearchTabParamList>) => {
+const getTabBarStyle = (route: RouteProp<SearchTabParamList>): StyleProp<ViewStyle> => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? "ListingScreen";
   switch (routeName) {
     case "DetailsScreen":
-      return { height: 0, width: 0 };
+      return { height: 0, width: 0, zIndex: -1 };
     default:
       return {
         paddingTop: Constants.statusBarHeight,
@@ -27,9 +28,6 @@ const getTabBarStyle = (route: RouteProp<SearchTabParamList>) => {
 function SearchTabsComp() {
   return (
     <SearchTabs.Navigator
-      // style={{
-      //   paddingTop: Constants.statusBarHeight,
-      // }}
       screenOptions={{
         tabBarStyle: {
           backgroundColor: Colors.primary500,

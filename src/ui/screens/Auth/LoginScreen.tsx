@@ -2,7 +2,6 @@ import { Alert, StyleSheet, TextInput, View } from "react-native";
 import PrimaryButton from "../../components/PrimaryButton";
 import Colors from "../../../util/Colors";
 import { useAppDispatch } from "../../../store/redux/hooks";
-import { useNavigation } from "@react-navigation/native";
 import { login } from "../../../store/redux/slices/userSlice";
 import { useState } from "react";
 import { useAppNavigation } from "../../../navigation/appNav";

@@ -13,12 +13,12 @@ type ListingProps = NativeStackScreenProps<
   "ListingScreen"
 >;
 
-function ListingScreen({ route, navigation }: ListingProps) {
+function ListingScreen({ navigation }: ListingProps) {
   const [
     listMovieFG,
     mediaListLoading,
     genreList,
-    genreListLoading,
+    _,
     toggleGenre,
     searchText,
     setSearchText,

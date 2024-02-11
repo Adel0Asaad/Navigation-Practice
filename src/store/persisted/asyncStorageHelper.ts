@@ -7,8 +7,13 @@ const seriesPrefix = "series/";
 
 export const removeMovie = async (id: number) => {
   try {
-    const key = moviePrefix + id;
-    await AsyncStorage.removeItem(key);
+    const movieList = await getMovies()
+    if(!movieList){
+      return
+    }
+    let filteredMovieList = movieList.filter((movie) => movie.id !== id)
+    await AsyncStorage.setItem(moviePrefix, JSON.stringify(filteredMovieList))
+    
   } catch (err: any) {
     console.log(err.message);
   }
@@ -16,8 +21,13 @@ export const removeMovie = async (id: number) => {
 
 export const removeSeries = async (id: number) => {
   try {
-    const key = seriesPrefix + id;
-    await AsyncStorage.removeItem(key);
+    const seriesList = await getSeries()
+    if(!seriesList){
+      return
+    }
+    let filteredSeriesList = seriesList.filter((series) => series.id !== id)
+    await AsyncStorage.setItem(seriesPrefix, JSON.stringify(filteredSeriesList))
+    
   } catch (err: any) {
     console.log(err.message);
   }
@@ -25,7 +35,13 @@ export const removeSeries = async (id: number) => {
 
 export const storeMovie = async (movie: Movie) => {
   try {
-    await AsyncStorage.setItem(moviePrefix + movie.id, JSON.stringify(movie));
+    let movieList = await getMovies()
+    if(movieList){
+      movieList.push(movie)
+    }else{
+      movieList = [movie]
+    }
+    await AsyncStorage.setItem(moviePrefix, JSON.stringify(movieList));
   } catch (err: any) {
     console.log("Error storing movie " + err.message);
   }
@@ -33,54 +49,28 @@ export const storeMovie = async (movie: Movie) => {
 
 export const storeSeries = async (series: Series) => {
   try {
-    await AsyncStorage.setItem(
-      seriesPrefix + series.id,
-      JSON.stringify(series)
-    );
+    let seriesList = await getSeries()
+    if(seriesList){
+      seriesList.push(series)
+    }else{
+      seriesList = [series]
+    }
+    await AsyncStorage.setItem(seriesPrefix, JSON.stringify(seriesList))
   } catch (err: any) {
     console.log("Error storing series " + err.message);
   }
 };
 
-export const getMediaFromStorage = async (key: string) => {
-  try {
-    return await AsyncStorage.getItem(key);
-  } catch (err: any) {
-    console.log("Error getting media " + err.message);
-  }
-};
-
-export const getAllKeys = async () => {
-  try {
-    const keys = await AsyncStorage.getAllKeys();
-    const movieKeys = keys.filter((key) => key.split(`/`)[0] === "movie");
-    const seriesKeys = keys.filter((key) => key.split(`/`)[0] === "series");
-    return { movieKeys, seriesKeys };
-  } catch (err: any) {
-    console.log("Error returning all keys: " + err.message);
-  }
-};
-
 export const getMovies = async () => {
+  console.log("Getting movies")
   try {
-    const keys = await AsyncStorage.getAllKeys();
-    console.log("aaa: " + keys)
-    const movieKeys = keys.filter((key) => key.split(`/`)[0] === "movie");
-
-    const movieEntries = await AsyncStorage.multiGet(movieKeys);
+    
+    const movieListJson = await AsyncStorage.getItem(moviePrefix) ?? ""
 
     // Parse JSON strings and extract values
-    const loadedMovies = movieEntries.map((entry) => {
-      const jsonString = entry[1];
-      return jsonString ? JSON.parse(jsonString) : null;
-    });
+    const movieList = JSON.parse(movieListJson) as Movie[]
 
-    // Filter out null values
-    const filteredLoadedMovies = loadedMovies.filter(
-      (movie) => movie !== null
-    ) as Movie[];
-
-    return filteredLoadedMovies;
+    return movieList;
   } catch (err: any) {
     console.log("Error retreiving keys: " + err.message);
   }
@@ -89,24 +79,13 @@ export const getMovies = async () => {
 export const getSeries = async () => {
   console.log("Getting series")
   try {
-    const keys = await AsyncStorage.getAllKeys();
-    console.log("bbb: " + keys)
-    const seriesKeys = keys.filter((key) => key.split(`/`)[0] === "series");
-
-    const seriesEntries = await AsyncStorage.multiGet(seriesKeys);
+    
+    const seriesListJson = await AsyncStorage.getItem(seriesPrefix) ?? ""
 
     // Parse JSON strings and extract values
-    const loadedSeries = seriesEntries.map((entry) => {
-      const jsonString = entry[1];
-      return jsonString ? JSON.parse(jsonString) : null;
-    });
+    const seriesList = JSON.parse(seriesListJson) as Series[]
 
-    // Filter out null values
-    const filteredLoadedSeries = loadedSeries.filter(
-      (series) => series !== null
-    ) as Series[];
-
-    return filteredLoadedSeries;
+    return seriesList;
   } catch (err: any) {
     console.log("Error in getSeries: " + err.message);
   }

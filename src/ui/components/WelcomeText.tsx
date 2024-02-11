@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { StyleSheet, Text, ViewStyle } from "react-native";
 import { useAppSelector } from "../../store/redux/hooks";
 
@@ -19,8 +18,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: "#3b73d3",
         textAlign: "center",
-        // borderWidth: 2,
-        // borderColor: "white",
         padding: 6,
     },
 })

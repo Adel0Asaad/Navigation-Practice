@@ -38,18 +38,3 @@ export const searchSeriesUrl = "/search/tv"
 export const movieGenresUrl = "/genre/movie/list";
 
 export const seriesGenresUrl = "/genre/tv/list";
-
-// export const getMovieGenres = (initialState: MediaGenre[] = []) => {
-//   const myOptions = movieGenreOptions;
-//   return useFetchGenreList(myOptions.url, myOptions, initialState);
-// };
-
-// export const getSeriesGenres = (initialState: MediaGenre[] = []) => {
-//   const myOptions = seriesGenreOptions;
-//   return useFetchGenreList(myOptions.url, myOptions, initialState);
-// };
-
-/**
- * customHook -> apiFetching (get?) (done?)
- * + debouncing! (not done!)
- */

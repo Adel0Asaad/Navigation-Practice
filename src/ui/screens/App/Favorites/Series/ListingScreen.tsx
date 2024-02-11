@@ -14,11 +14,11 @@ type ListingProps = NativeStackScreenProps<TVStackParamList, "ListingScreen">;
 //
 //
 
-function ListingScreen({ route, navigation }: ListingProps) {
+function ListingScreen({ navigation }: ListingProps) {
   const [
     listSeriesFG,
     genreList,
-    genreListLoading,
+    _,
     toggleGenre,
     searchText,
     setSearchText,

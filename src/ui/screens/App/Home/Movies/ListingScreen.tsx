@@ -14,15 +14,15 @@ type ListingProps = NativeStackScreenProps<
   "ListingScreen"
 >;
 
-function ListingScreen({ route, navigation }: ListingProps) {
+function ListingScreen({ navigation }: ListingProps) {
   const [
     listMovieFG,
     mediaListLoading,
     genreList,
-    genreListLoading,
+    ___,
     toggleGenre,
-    searchText,
-    setSearchText,
+    __,
+    _,
     movieListScrollEndHandler,
   ] = useListingHook("Movies") as [
     Movie[],

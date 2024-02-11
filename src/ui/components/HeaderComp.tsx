@@ -3,7 +3,8 @@ import { Dimensions, Pressable, StyleSheet, View, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import {
-  getAllKeys,
+  getMovies,
+  getSeries,
   removeMovie,
   removeSeries,
   storeMovie,
@@ -11,7 +12,7 @@ import {
 } from "../../store/persisted/asyncStorageHelper";
 import { Series } from "../../models/series";
 import { Movie } from "../../models/movie";
-import { useAppDispatch } from "../../store/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/redux/hooks";
 import { syncFav } from "../../store/redux/slices/favSlice";
 import { useAppNavigation } from "../../navigation/appNav";
 
@@ -24,16 +25,17 @@ type Props = {
 };
 
 const HeaderComp = ({ isMovie, mediaItem }: Props) => {
+  const shouldRefresh = useAppSelector((state) => state.favRefresh);
   const [isFav, setIsFav] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const [dimensions, setDimensions] = useState({
     window: windowDimensions,
     screen: screenDimensions,
   });
-  const navigation = useAppNavigation()
+  const navigation = useAppNavigation();
   const navCallBack = () => {
-    navigation.goBack()
-  }
+    navigation.goBack();
+  };
 
   useEffect(() => {
     // credits to https://reactnative.dev/docs/dimensions
@@ -44,28 +46,21 @@ const HeaderComp = ({ isMovie, mediaItem }: Props) => {
       }
     );
 
-    getAllKeys().then((allKeys) => {
-      if (isMovie) {
-        allKeys?.movieKeys.find(
-          (key) => mediaItem.id.toString() === key.split(`/`)[1]
-        )
-          ? setIsFav(true)
-          : null;
-      } else {
-        allKeys?.seriesKeys.find(
-          (key) => mediaItem.id.toString() === key.split(`/`)[1]
-        )
-          ? setIsFav(true)
-          : null;
-      }
-    });
-
     return () => subscription?.remove();
   }, []);
 
+  useEffect(() => {
+    const checkFav = async () => {
+      const mediaList = isMovie ? await getMovies() : await getSeries();
+      mediaList?.find((media) => mediaItem.id === media.id)
+        ? setIsFav(true)
+        : setIsFav(false);
+    };
+    checkFav();
+  }, [shouldRefresh]);
+
   const refreshFavs = () => {
     dispatch(syncFav());
-    console.log("Sent dispatch of true");
   };
 
   const favCallback = () => {

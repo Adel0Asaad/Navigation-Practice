@@ -1,18 +1,21 @@
-import { CSSProperties, ReactNode } from "react";
-import { StyleSheet, View, Text, Pressable, ViewStyle, GestureResponderEvent } from "react-native";
+import { ReactNode } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  ViewStyle,
+  GestureResponderEvent,
+} from "react-native";
 import Colors from "../../util/Colors";
 
 type ButtonProps = {
   children: ReactNode;
-  style?: ViewStyle | undefined,
-  onPress?: null | ((event: GestureResponderEvent) => void) | undefined,
+  style?: ViewStyle | undefined;
+  onPress?: null | ((event: GestureResponderEvent) => void) | undefined;
 };
 
 function PrimaryButton(props: ButtonProps) {
-  function pressHandler() {
-    console.log("Pressed!");
-  }
-
   return (
     <View style={[styles.buttonOuterContainer, props.style]}>
       <Pressable
@@ -22,7 +25,7 @@ function PrimaryButton(props: ButtonProps) {
             : styles.buttonInnerContainer
         }
         onPress={props.onPress}
-        android_ripple={{ color: Colors.primary500}}
+        android_ripple={{ color: Colors.primary500 }}
       >
         <Text style={styles.buttonText}>{props.children}</Text>
       </Pressable>

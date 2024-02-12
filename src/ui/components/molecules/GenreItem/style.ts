@@ -1,5 +1,5 @@
 import { Platform, StyleSheet } from "react-native";
-import Colors from "../../../../util/Colors";
+import LocalColors from "../../../../themes/colors";
 
 export const styles = StyleSheet.create({
   genreItem: {
@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     height: 35,
     justifyContent: "center",
     alignItems: "stretch",
-    backgroundColor: Colors.primary500,
+    backgroundColor: LocalColors.primary500,
     borderRadius: 45,
     elevation: 4,
     shadowColor: "black",
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     opacity: 0.75,
   },
   genreItemSelected: {
-    backgroundColor: Colors.primary800,
+    backgroundColor: LocalColors.primary800,
     opacity: 0.75,
   },
   genreText: {

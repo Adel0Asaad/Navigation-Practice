@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
-import Colors from "../../../../../../util/Colors";
+import LocalColors from "../../../../../../themes/colors";
 
 export const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    backgroundColor: Colors.backgroundColor,
+    backgroundColor: LocalColors.backgroundColor,
   },
   loading: {
     position: "absolute",
@@ -19,8 +19,8 @@ export const styles = StyleSheet.create({
     borderRadius: 30,
     overflow: "hidden",
     borderWidth: 1,
-    borderColor: Colors.primary500,
-    backgroundColor: Colors.primary500,
+    borderColor: LocalColors.primary500,
+    backgroundColor: LocalColors.primary500,
     color: "#120438",
     width: "100%",
   },

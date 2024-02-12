@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
-import Colors from "../../../../util/Colors";
+import LocalColors from "../../../../themes/colors";
 
 export const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: Colors.backgroundColor,
+    backgroundColor: LocalColors.backgroundColor,
   },
   imageContainer: {
     height: 400,

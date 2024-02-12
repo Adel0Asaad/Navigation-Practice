@@ -1,5 +1,5 @@
 import { FavTabs } from "../../../../navigation/containers/materialTopTab/FavTabs";
-import Colors from "../../../../util/Colors";
+import LocalColors from "../../../../themes/colors";
 import MovieStackComp from "./MovieStackComp";
 import TVStackComp from "./TVStackComp";
 import { getTabBarStyle } from "../../../../util/headerControl";
@@ -12,7 +12,7 @@ function FavTabsComp() {
       // }}
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: Colors.primary500,
+          backgroundColor: LocalColors.primary500,
         },
         tabBarActiveTintColor: "#FFFFFF",
       }}

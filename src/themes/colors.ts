@@ -1,4 +1,4 @@
-const Colors = {
+const LocalColors = {
   primary500: "#1f1d28",
   primary600: "#6b6875",
   primary800: "#353535",
@@ -8,4 +8,4 @@ const Colors = {
   backgroundColor: "#10101a",
 };
 
-export default Colors;
+export default LocalColors;

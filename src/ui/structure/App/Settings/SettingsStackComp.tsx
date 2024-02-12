@@ -1,7 +1,7 @@
 import SettingsDetailsScreen from "../../../screens/App/Settings/SettingsDetailsScreen";
 import SettingsScreen from "../../../screens/App/Settings/SettingsScreen";
 import { SettingsStack } from "../../../../navigation/containers/nativeStack/SettingsStack";
-import Colors from "../../../../util/Colors";
+import LocalColors from "../../../../themes/colors";
 
 function SettingsStackComp() {
   return (
@@ -9,7 +9,7 @@ function SettingsStackComp() {
       screenOptions={{
         title: "",
         headerTitleAlign: "center",
-        headerStyle: { backgroundColor: Colors.primary500 },
+        headerStyle: { backgroundColor: LocalColors.primary500 },
         headerTintColor: "white",
       }}
     >

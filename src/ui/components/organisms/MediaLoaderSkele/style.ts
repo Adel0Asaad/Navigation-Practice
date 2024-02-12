@@ -1,5 +1,5 @@
 import { Platform, StyleSheet } from "react-native";
-import Colors from "../../../../util/Colors";
+import LocalColors from "../../../../themes/colors";
 
 export const styles = StyleSheet.create({
   rootContainer: {
@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     height: 240,
     justifyContent: "center",
     alignItems: "stretch",
-    backgroundColor: Colors.primary500,
+    backgroundColor: LocalColors.primary500,
     borderRadius: 8,
     elevation: 4,
     shadowColor: "black",
@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     opacity: 0.75,
   },
   movieItemSelected: {
-    backgroundColor: Colors.primary600,
+    backgroundColor: LocalColors.primary600,
     opacity: 0.75,
   },
   movieTextContainer: {
@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     padding: 10,
   },
   movieText: {
-    backgroundColor: Colors.primary600,
+    backgroundColor: LocalColors.primary600,
     width: "70%",
     height: "25%",
     textAlign: "left",
@@ -45,6 +45,6 @@ export const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    backgroundColor: Colors.primary500,
+    backgroundColor: LocalColors.primary500,
   },
 });

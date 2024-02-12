@@ -4,7 +4,7 @@ import { Octicons } from "@expo/vector-icons";
 import SettingsStackComp from "./Settings/SettingsStackComp";
 import HomeTabsComp from "./Home/HomeTabsComp";
 import SearchTabsComp from "./Search/SearchTabsComp";
-import Colors from "../../../util/Colors";
+import LocalColors from "../../../themes/colors";
 import FavTabsComp from "./Fav/FavTabsComp";
 
 function AppTabsComp() {
@@ -12,7 +12,7 @@ function AppTabsComp() {
     <AppTabs.Navigator
       initialRouteName="HomeTabs"
       screenOptions={{
-        tabBarStyle: { backgroundColor: Colors.primary500 },
+        tabBarStyle: { backgroundColor: LocalColors.primary500 },
         tabBarShowLabel: false,
         tabBarActiveTintColor: ioniconStyle.activeColor,
         headerShown: false,

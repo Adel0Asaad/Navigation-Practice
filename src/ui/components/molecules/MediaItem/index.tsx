@@ -1,5 +1,5 @@
 import { View, Text, Pressable, Image } from "react-native";
-import Colors from "../../../../util/Colors";
+import LocalColors from "../../../../themes/colors";
 import { baseImgUrl } from "../../../../services/constants";
 import { Movie } from "../../../../models/movie";
 import { Series } from "../../../../models/series";
@@ -18,7 +18,7 @@ function MediaItem({ myMedia, onPress }: Props) {
         style={({ pressed }) =>
           pressed ? [styles.button, styles.pressedStyle] : styles.button
         }
-        android_ripple={{ color: Colors.primary600 }}
+        android_ripple={{ color: LocalColors.primary600 }}
         onPress={helperOnPressHandler}
       >
         <View style={styles.imageContainer}>

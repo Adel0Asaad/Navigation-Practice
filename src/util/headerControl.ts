@@ -4,7 +4,7 @@ import {
 } from "@react-navigation/native";
 import Constants from "expo-constants";
 import { StyleProp, ViewStyle } from "react-native";
-import Colors from "./Colors";
+import LocalColors from "../themes/colors";
 
 export const getTabBarStyle = (route: RouteProp<any>): StyleProp<ViewStyle> => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? "ListingScreen";
@@ -14,7 +14,7 @@ export const getTabBarStyle = (route: RouteProp<any>): StyleProp<ViewStyle> => {
     default:
       return {
         paddingTop: Constants.statusBarHeight,
-        backgroundColor: Colors.primary500,
+        backgroundColor: LocalColors.primary500,
       };
   }
 };

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import Colors from "../../../../util/Colors";
+import LocalColors from "../../../../themes/colors";
 
 export const styles = StyleSheet.create({
   rootScreen: {
@@ -10,8 +10,8 @@ export const styles = StyleSheet.create({
   userTextInput: {
     marginTop: 16,
     borderWidth: 1,
-    borderColor: Colors.accent300,
-    backgroundColor: Colors.accent300,
+    borderColor: LocalColors.accent300,
+    backgroundColor: LocalColors.accent300,
     borderRadius: 6,
     color: "#120438",
     width: "100%",

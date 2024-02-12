@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "../../../../../util/Debounce";
 import { MediaType } from "../../../../../services/types";
 import {
-  movieGenresUrl,
   searchMovieUrl,
   searchSeriesUrl,
+  movieGenresUrl,
   seriesGenresUrl,
 } from "../../../../../services/tmdbAPI/apiHelper";
 import { useFetchMediaList } from "../../../../../services/tmdbAPI/useFetchMediaList";
 import { Movie } from "../../../../../models/movie";
 import { Series } from "../../../../../models/series";
 import { useFetchGenreList } from "../../../../../services/tmdbAPI/useFetchGenreList";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { MovieStackParamList } from "../../../../../navigation/containers/nativeStack/MovieStack";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export const useListing = (
   mediaType: MediaType,

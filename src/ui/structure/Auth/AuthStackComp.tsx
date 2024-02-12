@@ -1,7 +1,7 @@
 import LoginScreen from "../../screens/Auth/LoginScreen";
 import RegisterScreen from "../../screens/Auth/RegisterScreen";
 import { AuthStack } from "../../../navigation/containers/nativeStack/AuthStack";
-import Colors from "../../../util/Colors";
+import LocalColors from "../../../themes/colors";
 
 function AuthStackComp() {
   return (
@@ -9,7 +9,7 @@ function AuthStackComp() {
       screenOptions={{
         title: "",
         headerTitleAlign: "center",
-        headerStyle: { backgroundColor: Colors.primary500 },
+        headerStyle: { backgroundColor: LocalColors.primary500 },
         headerTintColor: "white"
       }}
     >

@@ -1,5 +1,5 @@
 import { SearchTabs } from "../../../../navigation/containers/materialTopTab/SearchTabs";
-import Colors from "../../../../util/Colors";
+import LocalColors from "../../../../themes/colors";
 import MovieStackComp from "./MovieStackComp";
 import TVStackComp from "./TVStackComp";
 import { getTabBarStyle } from "../../../../util/headerControl";
@@ -9,7 +9,7 @@ function SearchTabsComp() {
     <SearchTabs.Navigator
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: Colors.primary500,
+          backgroundColor: LocalColors.primary500,
         },
         tabBarActiveTintColor: "#FFFFFF",
       }}

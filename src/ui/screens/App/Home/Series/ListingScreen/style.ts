@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
-import Colors from "../../../../../../util/Colors";
+import LocalColors from "../../../../../../themes/colors";
 
 export const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    backgroundColor: Colors.backgroundColor,
+    backgroundColor: LocalColors.backgroundColor,
   },
   searchInput: {
-    backgroundColor: Colors.primary800,
+    backgroundColor: LocalColors.primary800,
   },
   loading: {
     position: "absolute",

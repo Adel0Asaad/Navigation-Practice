@@ -1,5 +1,5 @@
 import { View, Text, Pressable, StyleSheet, Platform } from "react-native";
-import Colors from "../../../../util/Colors";
+import LocalColors from "../../../../themes/colors";
 import { useState } from "react";
 import { Props } from "./interface";
 import { styles } from "./style";
@@ -24,7 +24,7 @@ function GenreItem({ onPress, item }: Props) {
         style={({ pressed }) =>
           pressed ? [styles.button, styles.pressedStyle] : styles.button
         }
-        android_ripple={{ color: Colors.primary800 }}
+        android_ripple={{ color: LocalColors.primary800 }}
         onPress={helperOnPressHandler}
       >
         {({ pressed }) => {

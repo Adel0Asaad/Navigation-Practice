@@ -1,6 +1,5 @@
 import { CompositeNavigationProp, NavigatorScreenParams } from "@react-navigation/native";
-import { MovieStackParamList } from "../../../containers/nativeStack/MovieStack";
-import { TVStackParamList } from "../../../containers/nativeStack/TVStack";
+import { MovieStackParamList, TVStackParamList } from "../.mediaStackParams/interface";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";

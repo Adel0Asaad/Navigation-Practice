@@ -10,7 +10,7 @@ import { useFetchGenreList } from "../../../../../services/tmdbAPI/useFetchGenre
 import { getMovies, getSeries } from "../../../../../util/asyncMediaHelper";
 import { useAppSelector } from "../../../../../util/useReduxHooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { MovieStackParamList } from "../../../../../navigation/containers/nativeStack/MovieStack";
+import { MovieStackParamList } from "../../../../../navigation/BottomTabs/Tabs/.mediaStackParams/interface";
 
 export const useListing = (
   mediaType: MediaType,

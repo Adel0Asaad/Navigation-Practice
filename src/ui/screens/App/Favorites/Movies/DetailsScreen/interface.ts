@@ -1,4 +1,4 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { MovieStackParamList } from "../../../../../../navigation/containers/nativeStack/MovieStack";
+import { MovieStackParamList } from "../../../../../../navigation/BottomTabs/Tabs/.mediaStackParams/interface";
 
 export type Props = NativeStackScreenProps<MovieStackParamList,"DetailsScreen">;

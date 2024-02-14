@@ -1,5 +1,4 @@
-import { Movie } from "../../../../models/movie";
-import { Series } from "../../../../models/series";
+import { Movie, Series } from "../../../../models/media";
 
 export type Props = {
     mediaList: Array<Movie | Series>;

@@ -10,7 +10,7 @@ import {
 import { useFetchMediaList } from "../../../../../services/tmdbAPI/useFetchMediaList";
 import { Movie, Series } from "../../../../../models/media";
 import { useFetchGenreList } from "../../../../../services/tmdbAPI/useFetchGenreList";
-import { MovieStackParamList } from "../../../../../navigation/containers/nativeStack/MovieStack";
+import { MovieStackParamList } from "../../../../../navigation/BottomTabs/Tabs/.mediaStackParams/interface";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export const useListing = (

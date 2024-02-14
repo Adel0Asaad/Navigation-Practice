@@ -3,8 +3,7 @@ import {
   useAppSelector,
 } from "../../../../../util/useReduxHooks";
 import { useState, useEffect } from "react";
-import { Movie } from "../../../../../models/movie";
-import { Series } from "../../../../../models/series";
+import { Movie, Series } from "../../../../../models/media";
 import { useAppNavigation } from "../../../../../util/useAppNavigation";
 import {
   getMovies,

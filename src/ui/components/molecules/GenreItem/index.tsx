@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet, Platform } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import LocalColors from "../../../../themes/colors";
 import { useState } from "react";
 import { Props } from "./interface";

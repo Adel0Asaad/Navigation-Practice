@@ -1,6 +1,5 @@
 import { MediaGenre } from "../../../../models/genres";
-import { Movie } from "../../../../models/movie";
-import { Series } from "../../../../models/series";
+import { Movie, Series } from "../../../../models/media";
 
 export type Props = {
   mediaItem: Movie | Series;

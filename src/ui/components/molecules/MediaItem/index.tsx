@@ -6,7 +6,7 @@ import { Series } from "../../../../models/series";
 import { Props } from "./interface";
 import { styles } from "./style";
 
-function MediaItem({ myMedia, onPress }: Props) {
+const MediaItem = ({ myMedia, onPress }: Props) =>{
   const isMovie = Object.keys(myMedia).includes("title");
   const helperOnPressHandler = () => {
     onPress(myMedia.id);

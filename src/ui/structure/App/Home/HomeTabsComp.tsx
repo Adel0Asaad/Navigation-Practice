@@ -2,7 +2,7 @@ import { HomeTabs } from "../../../../navigation/containers/materialTopTab/HomeT
 import LocalColors from "../../../../themes/colors";
 import MovieStackComp from "./MovieStackComp";
 import TVStackComp from "./TVStackComp";
-import { getTabBarStyle } from "../../../../util/headerControl";
+import { getTabBarStyle } from "../../../../services/getTabBarStyle";
 
 function HomeTabsComp() {
   return (

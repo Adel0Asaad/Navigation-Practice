@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Alert } from "react-native";
-import { useAppDispatch } from "../../../../../store/redux/hooks";
+import { useAppDispatch } from "../../../../../util/useReduxHooks";
 import { login } from "../../../../../store/redux/slices/userSlice";
 import { Props } from "../interface";
-import { useAppNavigation } from "../../../../../navigation/hooks/useAppNavigation";
+import { useAppNavigation } from "../../../../../util/useAppNavigation";
 
 export const useRegister = ({route}: Props) => {
     const navigation = useAppNavigation()

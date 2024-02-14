@@ -1,8 +1,8 @@
 import { Alert } from "react-native";
 import { login } from "../../../../../store/redux/slices/userSlice";
-import { useAppDispatch } from "../../../../../store/redux/hooks";
+import { useAppDispatch } from "../../../../../util/useReduxHooks";
 import { useState } from "react";
-import { useAppNavigation } from "../../../../../navigation/hooks/useAppNavigation";
+import { useAppNavigation } from "../../../../../util/useAppNavigation";
 
 export const useLogin = () => {
   const navigation = useAppNavigation();

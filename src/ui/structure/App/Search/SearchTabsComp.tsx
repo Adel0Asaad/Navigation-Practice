@@ -2,7 +2,7 @@ import { SearchTabs } from "../../../../navigation/containers/materialTopTab/Sea
 import LocalColors from "../../../../themes/colors";
 import MovieStackComp from "./MovieStackComp";
 import TVStackComp from "./TVStackComp";
-import { getTabBarStyle } from "../../../../util/headerControl";
+import { getTabBarStyle } from "../../../../services/getTabBarStyle";
 
 function SearchTabsComp() {
   return (

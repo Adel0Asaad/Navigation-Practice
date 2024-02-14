@@ -27,6 +27,8 @@ export const mediaParams = {
   with_genres: "",
 };
 
+//export const endpoints {object of urls}
+
 export const discoverMovieUrl = "/discover/movie";
 
 export const discoverSeriesUrl = "/discover/tv";

@@ -1,18 +1,14 @@
 import { useEffect, useState } from "react";
-import { useDebounce } from "../../../../../util/Debounce";
-import { MediaType } from "../../../../../services/types";
+import { useDebounce } from "../../../../../services/useDebounce";
+import { MediaType } from "../../../../../models/genres";
 import {
   movieGenresUrl,
   seriesGenresUrl,
 } from "../../../../../services/tmdbAPI/apiHelper";
-import { Movie } from "../../../../../models/movie";
-import { Series } from "../../../../../models/series";
+import { Movie, Series } from "../../../../../models/media";
 import { useFetchGenreList } from "../../../../../services/tmdbAPI/useFetchGenreList";
-import {
-  getMovies,
-  getSeries,
-} from "../../../../../store/persisted/asyncStorageHelper";
-import { useAppSelector } from "../../../../../store/redux/hooks";
+import { getMovies, getSeries } from "../../../../../util/asyncMediaHelper";
+import { useAppSelector } from "../../../../../util/useReduxHooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { MovieStackParamList } from "../../../../../navigation/containers/nativeStack/MovieStack";
 

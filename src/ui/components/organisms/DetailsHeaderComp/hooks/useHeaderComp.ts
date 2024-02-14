@@ -1,11 +1,11 @@
 import {
   useAppDispatch,
   useAppSelector,
-} from "../../../../../store/redux/hooks";
+} from "../../../../../util/useReduxHooks";
 import { useState, useEffect } from "react";
 import { Movie } from "../../../../../models/movie";
 import { Series } from "../../../../../models/series";
-import { useAppNavigation } from "../../../../../navigation/hooks/useAppNavigation";
+import { useAppNavigation } from "../../../../../util/useAppNavigation";
 import {
   getMovies,
   getSeries,
@@ -13,7 +13,7 @@ import {
   removeSeries,
   storeMovie,
   storeSeries,
-} from "../../../../../store/persisted/asyncStorageHelper";
+} from "../../../../../util/asyncMediaHelper";
 import { syncFav } from "../../../../../store/redux/slices/favSlice";
 import { Props } from "../interface";
 import { useAppDimensions } from "../../../../../themes/useAppDimensions";

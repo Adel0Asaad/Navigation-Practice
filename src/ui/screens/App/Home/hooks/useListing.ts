@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDebounce } from "../../../../../util/Debounce";
-import { MediaType } from "../../../../../services/types";
+import { useDebounce } from "../../../../../services/useDebounce";
+import { MediaType } from "../../../../../models/genres";
 import {
   discoverMovieUrl,
   discoverSeriesUrl,
@@ -8,8 +8,7 @@ import {
   seriesGenresUrl,
 } from "../../../../../services/tmdbAPI/apiHelper";
 import { useFetchMediaList } from "../../../../../services/tmdbAPI/useFetchMediaList";
-import { Movie } from "../../../../../models/movie";
-import { Series } from "../../../../../models/series";
+import { Movie, Series } from "../../../../../models/media";
 import { useFetchGenreList } from "../../../../../services/tmdbAPI/useFetchGenreList";
 import { MovieStackParamList } from "../../../../../navigation/containers/nativeStack/MovieStack";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";

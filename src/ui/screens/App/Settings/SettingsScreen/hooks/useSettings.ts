@@ -1,4 +1,4 @@
-import { useAppNavigation } from "../../../../../../navigation/hooks/useAppNavigation";
+import { useAppNavigation } from "../../../../../../util/useAppNavigation";
 
 export const useSettings = () => {
     const navigation = useAppNavigation();

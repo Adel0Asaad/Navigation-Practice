@@ -1,5 +1,5 @@
 import { Text } from "react-native";
-import { useAppSelector } from "../../../../store/redux/hooks";
+import { useAppSelector } from "../../../../util/useReduxHooks";
 import { Props } from "./interface";
 import { styles } from "./style";
 

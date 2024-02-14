@@ -1,4 +1,4 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { AuthStackParamList } from "../../../../navigation/containers/nativeStack/AuthStack";
+import { AuthStackParamList } from "../../../../navigation/AuthStack/interface";
 
 export type Props = NativeStackScreenProps<AuthStackParamList, "RegisterScreen">;

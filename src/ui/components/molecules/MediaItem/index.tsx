@@ -1,8 +1,7 @@
 import { View, Text, Pressable, Image } from "react-native";
 import LocalColors from "../../../../themes/colors";
-import { baseImgUrl } from "../../../../services/constants";
-import { Movie } from "../../../../models/movie";
-import { Series } from "../../../../models/series";
+import { baseImgUrl } from "../../../../services/tmdbAPI/constants";
+import { Movie, Series } from "../../../../models/media";
 import { Props } from "./interface";
 import { styles } from "./style";
 

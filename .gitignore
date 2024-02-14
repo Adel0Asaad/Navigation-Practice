@@ -35,4 +35,4 @@ yarn-error.*
 *.tsbuildinfo
 
 #apiKey
-src/backend/apiKey.ts
+src/services/tmdbAPI/apiKey.ts

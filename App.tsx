@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { store } from "./src/store/redux/store";
-import RootStackComp from "./src/ui/structure/Root/RootStackComp";
+import RootStackComp from "./src/navigation";
 
 export default function App() {
   return (

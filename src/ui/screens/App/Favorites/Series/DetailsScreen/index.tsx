@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { baseImgUrl } from "../../../../../../services/constants";
+import { baseImgUrl } from "../../../../../../services/tmdbAPI/constants";
 import DetailsScreenComp from "../../../../../components/pages/DetailsScreenComp";
 import { Movie } from "../../../../../../models/media";
 import { Props } from "./interface";

@@ -1,6 +1,6 @@
-import { apiKey } from "../apiKey";
+import { apiKey } from "./apiKey";
 import axios from "axios";
-import { baseUrl } from "../constants";
+import { baseUrl } from "./constants";
 
 export const axiosClient = axios.create({
   baseURL: baseUrl,

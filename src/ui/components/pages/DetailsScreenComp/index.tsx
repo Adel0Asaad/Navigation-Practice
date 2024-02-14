@@ -1,8 +1,7 @@
 import { Ionicons, Entypo } from "@expo/vector-icons";
 import { View, ScrollView, Image, Text } from "react-native";
-import { baseImgUrl } from "../../../../services/constants";
-import { Movie } from "../../../../models/movie";
-import { Series } from "../../../../models/series";
+import { baseImgUrl } from "../../../../services/tmdbAPI/constants";
+import { Movie, Series } from "../../../../models/media"
 import HeaderComp from "../../organisms/DetailsHeaderComp";
 import { ioniconStyle, styles } from "./style";
 import { Props } from "./interface";

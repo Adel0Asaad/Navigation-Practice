@@ -1,6 +1,6 @@
-import AppTabsComp from "../ui/structure/App/AppTabsComp";
-import AuthStackComp from "../ui/structure/Auth/AuthStackComp";
-import { RootStack } from "./containers/nativeStack/RootStack";
+import { RootStack } from "./interface";
+import AppTabsComp from "./BottomTabs";
+import AuthStackComp from "./AuthStack";
 
 function RootStackComp() {
   return (

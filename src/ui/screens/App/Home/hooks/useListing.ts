@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDebounce } from "../../../../../services/useDebounce";
 import { MediaType } from "../../../../../models/genres";
-import {
-  discoverMovieUrl,
-  discoverSeriesUrl,
-  movieGenresUrl,
-  seriesGenresUrl,
-} from "../../../../../services/tmdbAPI/apiHelper";
-import { useFetchMediaList } from "../../../../../services/tmdbAPI/useFetchMediaList";
+import { endPoints } from "../../../../../services/tmdbAPI/apiHelper";
+import { useFetchMediaList } from "../../../../../services/tmdbAPI/media/useFetchMediaList";
 import { Movie, Series } from "../../../../../models/media";
-import { useFetchGenreList } from "../../../../../services/tmdbAPI/useFetchGenreList";
+import { useFetchGenreList } from "../../../../../services/tmdbAPI/media/useFetchGenreList";
 import { MovieStackParamList } from "../../../../../navigation/BottomTabs/Tabs/.mediaStackParams/interface";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -41,12 +36,17 @@ export const useListing = (
 
   const addMediaList = () => {
     setMediaList((prevList) => {
+      console.log("previous list: ", prevList, "added list: ", mediaList);
       return [...prevList, ...mediaList] as Movie[] | Series[];
     });
   };
 
-  const mediaUrl = isMediaMovies ? discoverMovieUrl : discoverSeriesUrl;
-  const genresUrl = isMediaMovies ? movieGenresUrl : seriesGenresUrl;
+  const mediaUrl = isMediaMovies
+    ? endPoints.discoverMovieUrl
+    : endPoints.discoverSeriesUrl;
+  const genresUrl = isMediaMovies
+    ? endPoints.movieGenresUrl
+    : endPoints.seriesGenresUrl;
   ////////////////////////// MTYPE //////////////////////////
 
   //
@@ -75,9 +75,7 @@ export const useListing = (
   };
 
   useEffect(() => {
-    if (
-      UIParams.selectedGenres !== undefined
-    ) {
+    if (UIParams.selectedGenres !== undefined) {
       console.log("Loading data!");
       loadMedia(UIParams.curPage, UIParams.selectedGenres, UIParams.searchText);
     }
@@ -87,10 +85,7 @@ export const useListing = (
   //
 
   ////////////////////////// GENRES //////////////////////////
-  const [genreList, genreListError, genreListLoading] = useFetchGenreList(
-    genresUrl,
-    []
-  );
+  const [genreList, genreListLoading] = useFetchGenreList(genresUrl, []);
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
   const appliedGenreFilter = useDebounce(selectedGenres, 500);
 
@@ -106,7 +101,7 @@ export const useListing = (
     // maybe check for if search text is empty
     setMediaList([]);
     setUIParams((prevParams) => {
-      console.log("Genre update of " + mediaType);
+      // console.log("Genre update of " + mediaType);
       let newParams = { ...prevParams };
       newParams.curPage = 1;
       newParams.selectedGenres = appliedGenreFilter;
@@ -118,37 +113,18 @@ export const useListing = (
   //
 
   ////////////////////////// MEDIA ///////////////////////////
-  const [mediaList, mediaListError, mediaListLoading, loadMedia] = isMediaMovies
+  const [mediaList, mediaListLoading, loadMedia] = isMediaMovies
     ? useFetchMediaList<Movie>(mediaUrl, [])
     : useFetchMediaList<Series>(mediaUrl, []);
 
   const [filteredMediaList, setMediaList] = useState<Movie[] | Series[]>([]);
   useEffect(() => {
     if (mediaList.length) {
-      console.log("Adding media list");
+      // console.log("Adding media list");
       addMediaList();
     }
   }, [mediaList]);
   ////////////////////////// MEDIA ///////////////////////////
-
-  //
-
-  /////////////////////////////////////////////////////////////// DEBUGGING ///////////////////////////////////////////////////////////////
-  useEffect(() => {
-    if (genreListError !== null) {
-      let consType = isMediaMovies ? "movies: " : "series: ";
-      console.log("Error loading genres of " + consType + genreListError);
-    }
-  }, [genreListError]);
-  useEffect(() => {
-    if (mediaListError !== null) {
-      let consType = isMediaMovies ? "movies: " : "series: ";
-      console.log("Error loading list of " + consType + mediaListError);
-    }
-  }, [mediaListError]);
-  /////////////////////////////////////////////////////////////// DEBUGGING ///////////////////////////////////////////////////////////////
-
-  //
 
   return {
     filteredMediaList,

@@ -59,7 +59,6 @@ export const storeSeries = async (series: Series) => {
 };
 
 export const getMovies = async () => {
-  console.log("Getting movies");
   try {
     const movieList = await getData<Movie[]>(moviePrefix);
     return movieList;
@@ -69,7 +68,6 @@ export const getMovies = async () => {
 };
 
 export const getSeries = async () => {
-  console.log("Getting series");
   try {
     const seriesList = await getData<Series[]>(seriesPrefix);
 

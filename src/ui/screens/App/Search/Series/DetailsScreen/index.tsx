@@ -13,7 +13,6 @@ const DetailsScreen = ({ route, navigation }: Props) => {
       title: myMedia instanceof Movie ? myMedia.title : myMedia.name,
       headerTransparent: true,
     });
-    console.log(baseImgUrl + myMedia.poster_path);
   }, []);
 
   return <DetailsScreenComp mediaItem={myMedia} genreList={genreList} />;

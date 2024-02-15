@@ -7,7 +7,6 @@ import { useAppNavigation } from "../../../../../util/useAppNavigation";
 
 export const useRegister = ({route}: Props) => {
     const navigation = useAppNavigation()
-    console.log(route.params?.username);
     const [username, setUsername] = useState<string>(
       route.params?.username ?? ""
     );
@@ -18,7 +17,6 @@ export const useRegister = ({route}: Props) => {
     }
   
     function dispatchLogin() {
-      console.log(username);
       if (username !== "") {
         dispatch(login(username));
         navigation.navigate("AppTabs", {

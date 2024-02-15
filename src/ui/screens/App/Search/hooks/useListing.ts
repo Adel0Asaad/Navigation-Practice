@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDebounce } from "../../../../../services/useDebounce";
 import { MediaType } from "../../../../../models/genres";
-import {
-  searchMovieUrl,
-  searchSeriesUrl,
-  movieGenresUrl,
-  seriesGenresUrl,
-} from "../../../../../services/tmdbAPI/apiHelper";
-import { useFetchMediaList } from "../../../../../services/tmdbAPI/useFetchMediaList";
+import { endPoints } from "../../../../../services/tmdbAPI/apiHelper";
+import { useFetchMediaList } from "../../../../../services/tmdbAPI/media/useFetchMediaList";
 import { Movie, Series } from "../../../../../models/media";
-import { useFetchGenreList } from "../../../../../services/tmdbAPI/useFetchGenreList";
+import { useFetchGenreList } from "../../../../../services/tmdbAPI/media/useFetchGenreList";
 import { MovieStackParamList } from "../../../../../navigation/BottomTabs/Tabs/.mediaStackParams/interface";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -45,8 +40,8 @@ export const useListing = (
     });
   };
 
-  const mediaUrl = isMediaMovies ? searchMovieUrl : searchSeriesUrl;
-  const genresUrl = isMediaMovies ? movieGenresUrl : seriesGenresUrl;
+  const mediaUrl = isMediaMovies ? endPoints.searchMovieUrl : endPoints.searchSeriesUrl;
+  const genresUrl = isMediaMovies ? endPoints.movieGenresUrl : endPoints.seriesGenresUrl;
   ////////////////////////// MTYPE //////////////////////////
 
   //
@@ -74,6 +69,7 @@ export const useListing = (
 
   useEffect(() => {
     if (UIParams.searchText !== undefined) {
+      console.log("useListing: params sent: ", UIParams);
       loadMedia(UIParams.curPage, UIParams.selectedGenres, UIParams.searchText);
     }
   }, [UIParams]);
@@ -82,16 +78,13 @@ export const useListing = (
   //
 
   ////////////////////////// GENRES //////////////////////////
-  const [genreList, genreListError, genreListLoading] = useFetchGenreList(
-    genresUrl,
-    []
-  );
+  const [genreList, genreListLoading] = useFetchGenreList(genresUrl, []);
   ////////////////////////// GENRES //////////////////////////
 
   //
 
   ////////////////////////// MEDIA ///////////////////////////
-  const [mediaList, mediaListError, mediaListLoading, loadMedia] = isMediaMovies
+  const [mediaList, mediaListLoading, loadMedia] = isMediaMovies
     ? useFetchMediaList<Movie>(mediaUrl, [])
     : useFetchMediaList<Series>(mediaUrl, []);
 
@@ -120,23 +113,6 @@ export const useListing = (
   }, [appliedTextFilter]);
 
   ////////////////////////// SEARCH //////////////////////////
-
-  /////////////////////////////////////////////////////////////// DEBUGGING ///////////////////////////////////////////////////////////////
-  useEffect(() => {
-    if (genreListError !== null) {
-      let consType = isMediaMovies ? "movies: " : "series: ";
-      console.log("Error loading genres of " + consType + genreListError);
-    }
-  }, [genreListError]);
-  useEffect(() => {
-    if (mediaListError !== null) {
-      let consType = isMediaMovies ? "movies: " : "series: ";
-      console.log("Error loading list of " + consType + mediaListError);
-    }
-  }, [mediaListError]);
-  /////////////////////////////////////////////////////////////// DEBUGGING ///////////////////////////////////////////////////////////////
-
-  //
 
   return {
     filteredMediaList,

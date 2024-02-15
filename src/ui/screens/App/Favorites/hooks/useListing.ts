@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDebounce } from "../../../../../services/useDebounce";
 import { MediaType } from "../../../../../models/genres";
-import {
-  movieGenresUrl,
-  seriesGenresUrl,
-} from "../../../../../services/tmdbAPI/apiHelper";
+import { endPoints } from "../../../../../services/tmdbAPI/apiHelper";
 import { Movie, Series } from "../../../../../models/media";
-import { useFetchGenreList } from "../../../../../services/tmdbAPI/useFetchGenreList";
+import { useFetchGenreList } from "../../../../../services/tmdbAPI/media/useFetchGenreList";
 import { getMovies, getSeries } from "../../../../../util/asyncMediaHelper";
 import { useAppSelector } from "../../../../../util/useReduxHooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -37,7 +34,9 @@ export const useListing = (
   };
   ////////////////////////// MTYPE //////////////////////////
   const isMediaMovies = mediaType === "Movies";
-  const genresUrl = isMediaMovies ? movieGenresUrl : seriesGenresUrl;
+  const genresUrl = isMediaMovies
+    ? endPoints.movieGenresUrl
+    : endPoints.seriesGenresUrl;
   const favRefresh = useAppSelector((state) => state.favRefresh);
   ////////////////////////// MTYPE //////////////////////////
 
@@ -53,10 +52,7 @@ export const useListing = (
   //
 
   ////////////////////////// GENRES //////////////////////////
-  const [genreList, genreListError, genreListLoading] = useFetchGenreList(
-    genresUrl,
-    []
-  );
+  const [genreList, genreListLoading] = useFetchGenreList(genresUrl, []);
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
   const appliedGenreFilter = useDebounce(selectedGenres, 500);
 
@@ -129,17 +125,6 @@ export const useListing = (
 
     setFilteredMediaList(filteredByText as Movie[] | Series[]);
   }, [UIParams, iMediaList]);
-
-  /////////////////////////////////////////////////////////////// DEBUGGING ///////////////////////////////////////////////////////////////
-  useEffect(() => {
-    if (genreListError !== null) {
-      let consType = isMediaMovies ? "movies: " : "series: ";
-      console.log("Error loading genres of " + consType + genreListError);
-    }
-  }, [genreListError]);
-  /////////////////////////////////////////////////////////////// DEBUGGING ///////////////////////////////////////////////////////////////
-
-  //
 
   return {
     filteredMediaList,

@@ -14,7 +14,6 @@ export const useLogin = () => {
   }
 
   function dispatchLogin() {
-    console.log(username);
     if (username !== "") {
       dispatch(login(username));
       navigation.navigate("AppTabs", {

@@ -15,8 +15,8 @@ axiosClient.interceptors.request.use(
     console.log("Sending request with config: ", config);
     return config;
   },
-  (err) => {
-    console.log(err);
+  (err: any) => {
+    console.error(err.message);
     return Promise.reject(err);
   }
 );
@@ -24,6 +24,10 @@ axiosClient.interceptors.request.use(
 axiosClient.interceptors.response.use((value) => {
   console.log("Got response with data: ", value.data);
   return value;
+},
+(err: any) => {
+  console.error(err.message)
+  return Promise.reject(err)
 });
 
 export const mediaParams = {

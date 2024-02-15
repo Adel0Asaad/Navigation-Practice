@@ -29,7 +29,7 @@ export const useListing = (
         genreList: sentGenreList,
       });
     } catch (err: any) {
-      console.log(err.message);
+      console.error(err.message);
     }
   };
   ////////////////////////// MTYPE //////////////////////////

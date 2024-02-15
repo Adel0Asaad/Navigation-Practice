@@ -31,7 +31,6 @@ export const useFetchMediaList = <S extends Movie | Series>(
       return;
     }
     if (apiError) {
-      console.log(apiError);
       return;
     }
     if (apiData) {

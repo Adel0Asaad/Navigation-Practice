@@ -28,7 +28,7 @@ export const useListing = (
         genreList: sentGenreList,
       });
     } catch (err: any) {
-      console.log(err.message);
+      console.error(err.message);
     }
   };
   ////////////////////////// MTYPE //////////////////////////
@@ -69,7 +69,6 @@ export const useListing = (
 
   useEffect(() => {
     if (UIParams.searchText !== undefined) {
-      console.log("useListing: params sent: ", UIParams);
       loadMedia(UIParams.curPage, UIParams.selectedGenres, UIParams.searchText);
     }
   }, [UIParams]);

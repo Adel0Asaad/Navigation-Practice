@@ -28,7 +28,7 @@ export const useListing = (
         genreList: sentGenreList,
       });
     } catch (err: any) {
-      console.log(err.message);
+      console.error(err.message);
     }
   };
   ////////////////////////// MTYPE //////////////////////////
@@ -36,7 +36,6 @@ export const useListing = (
 
   const addMediaList = () => {
     setMediaList((prevList) => {
-      console.log("previous list: ", prevList, "added list: ", mediaList);
       return [...prevList, ...mediaList] as Movie[] | Series[];
     });
   };
@@ -101,7 +100,7 @@ export const useListing = (
     // maybe check for if search text is empty
     setMediaList([]);
     setUIParams((prevParams) => {
-      // console.log("Genre update of " + mediaType);
+      console.log("Genre update of " + mediaType);
       let newParams = { ...prevParams };
       newParams.curPage = 1;
       newParams.selectedGenres = appliedGenreFilter;
@@ -120,7 +119,6 @@ export const useListing = (
   const [filteredMediaList, setMediaList] = useState<Movie[] | Series[]>([]);
   useEffect(() => {
     if (mediaList.length) {
-      // console.log("Adding media list");
       addMediaList();
     }
   }, [mediaList]);

@@ -13,7 +13,7 @@ export const removeMovie = async (id: number) => {
     let filteredMovieList = movieList.filter((movie) => movie.id !== id);
     await setData(moviePrefix, filteredMovieList);
   } catch (err: any) {
-    console.log(err.message);
+    console.error(err.message);
   }
 };
 
@@ -26,7 +26,7 @@ export const removeSeries = async (id: number) => {
     let filteredSeriesList = seriesList.filter((series) => series.id !== id);
     await setData(seriesPrefix, filteredSeriesList);
   } catch (err: any) {
-    console.log(err.message);
+    console.error(err.message);
   }
 };
 
@@ -40,7 +40,7 @@ export const storeMovie = async (movie: Movie) => {
     }
     await setData(moviePrefix, movieList);
   } catch (err: any) {
-    console.log("Error storing movie " + err.message);
+    console.error("Error storing movie " + err.message);
   }
 };
 
@@ -54,7 +54,7 @@ export const storeSeries = async (series: Series) => {
     }
     await setData(seriesPrefix, seriesList);
   } catch (err: any) {
-    console.log("Error storing series " + err.message);
+    console.error("Error storing series " + err.message);
   }
 };
 
@@ -63,7 +63,7 @@ export const getMovies = async () => {
     const movieList = await getData<Movie[]>(moviePrefix);
     return movieList;
   } catch (err: any) {
-    console.log("Error retreiving movies: " + err.message);
+    console.error("Error retreiving movies: " + err.message);
   }
 };
 
@@ -73,6 +73,6 @@ export const getSeries = async () => {
 
     return seriesList;
   } catch (err: any) {
-    console.log("Error in retreiving series: " + err.message);
+    console.error("Error in retreiving series: " + err.message);
   }
 };

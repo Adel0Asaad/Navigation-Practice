@@ -19,7 +19,6 @@ export const useFetchGenreList = (
       return;
     }
     if (apiError) {
-      console.error(apiError.message);
       return;
     }
     if (apiData) {
@@ -29,8 +28,6 @@ export const useFetchGenreList = (
   }, [apiData, apiError, apiIsLoading]);
 
   useEffect(() => {
-    console.log(dataUrl);
-    console.log("Should get genres here!");
     apiGet(dataUrl, {params: {}});
   }, []);
 
